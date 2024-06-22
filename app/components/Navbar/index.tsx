@@ -28,8 +28,8 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar fixed top-0 left-0 w-full z-20 transition-all duration-300 text-white ${
-        isScrolled ? "bg-base-100" : "bg-base-100 bg-opacity-0"
+      className={`navbar h-24 fixed top-0 left-0 w-full z-20 transition-all duration-300 text-white ${
+        isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
       }`}
     >
       <div className="navbar-start">
@@ -69,6 +69,9 @@ const Navbar = () => {
               <li>
                 <a>About us</a>
               </li>
+              <li>
+                <a>Dummy</a>
+              </li>
             </ul>
           )}
         </div>
@@ -76,26 +79,35 @@ const Navbar = () => {
           <Image
             src="/Hannover.png"
             alt="Hannover Logo"
-            width={45}
-            height={45}
+            width={65}
+            height={65}
           />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
+          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <a>Event</a>
           </li>
-          <li>
+          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <a>Expo</a>
           </li>
-          <li>
+          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <a>About Us</a>
+          </li>
+          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+            <a>Dummy</a>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn text-white">Login</a>
+        <a
+          className={`btn ${
+            isScrolled ? "bg-white text-black" : "bg-black text-white"
+          }`}
+        >
+          Login
+        </a>
       </div>
     </div>
   );

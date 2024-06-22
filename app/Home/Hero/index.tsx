@@ -24,17 +24,21 @@ const Hero = () => {
             alt="Box Title"
             width={800}
             height={600}
-            className="absolute z-20 "
-            style={{ left: "5%" }}
+            className="absolute z-20"
+            style={{ left: "-10%" }}
           />
-          <div className="relative z-30 p-8 text-center">
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold">
-              Shaping the Future with Technology
+          <div className="absolute z-30 w-full h-full flex flex-col justify-center p-8 text-left pl-36 lg:pl-44">
+            <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold">
+              <span>
+                Shaping the Future
+                <br />
+                with Technology
+              </span>
             </h1>
             <p className="mt-4 text-xl md:text-2xl">
               World. Leading. Industryshow.
             </p>
-            <button className="mt-6 btn btn-primary">
+            <button className="mt-6 btn btn-primary w-48 ml-0 bg-white text-black rounded-full md:ml-20 lg:ml-24">
               Become an Exhibitor
             </button>
           </div>
