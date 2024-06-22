@@ -8,8 +8,7 @@ const Hero = () => {
         autoPlay
         loop
         muted
-        className="absolute inset-0 w-full h-full object-cover"
-      >
+        className="absolute inset-0 w-full h-full object-cover">
         <source
           src="https://res.cloudinary.com/djyevwtie/video/upload/v1718554165/assetmp/qn7hf3parz4o7oe3e4ba.mp4"
           type="video/mp4"
@@ -38,7 +37,7 @@ const Hero = () => {
             <p className="mt-4 text-xl md:text-2xl">
               World. Leading. Industryshow.
             </p>
-            <button className="mt-6 btn btn-primary w-48 ml-0 bg-white text-black rounded-full md:ml-20 lg:ml-24">
+            <button className="mt-6 btn hover:text-white w-48 ml-0 bg-white hover:bg-red text-black border-transparent rounded-full md:ml-20 lg:ml-24">
               Become an Exhibitor
             </button>
           </div>
