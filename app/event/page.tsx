@@ -1,8 +1,11 @@
 import React from "react";
 import RegularButton from "../components/Button/regularButton";
+import SpeakerCard from "../components/Card/speakerCard";
 import Footer from "../components/footer";
 import Navbar from "../components/Navbar";
 import EventDetailSection from "./eventDetailSection";
+import EventOrganizerSection from "./eventOrganizerSection";
+import EventSpeakersSection from "./eventSpeakersSection";
 
 export default function Home() {
   return (
@@ -23,6 +26,8 @@ export default function Home() {
         imgUrl="/hm_107216_408x408_thumb.jpg"
         imgAlt="/hm_107216_408x408_thumb.jpg"
       />
+      <EventSpeakersSection />
+      <EventOrganizerSection />
       <Footer />
     </main>
   );
