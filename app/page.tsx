@@ -6,6 +6,7 @@ import Hero from "./Home/Hero";
 
 import Navbar from "./components/Navbar";
 import Gallery from "./Home/Gallery";
+import React from "react";
 
 export default function Home() {
   return (
