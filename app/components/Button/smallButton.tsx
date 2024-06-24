@@ -35,7 +35,8 @@ const SmallButton: React.FC<SmallButtonProps> = ({
             backgroundHoverColor && `hover:${backgroundHoverColor}`,
             borderColor,
             borderHoverColor && `hover:${borderHoverColor}`
-          )}>
+          )}
+        >
           {title}
         </button>
       </Link>

@@ -88,7 +88,7 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-2xl font-bold">
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/eventlist">Event</Link>
           </li>

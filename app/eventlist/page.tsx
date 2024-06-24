@@ -1,15 +1,15 @@
+import Footer from "../components/footer";
 import Navbar from "../components/Navbar";
-import MonthEvent from "./components/MonthEvents/MonthEvent";
-import TitleBlock from "./components/titleblock";
+import EventListSection from "./eventListSection";
 
-export const eventlist = () => {
+export const Eventlist = () => {
   return (
-    <div>
+    <div className="bg-gray-300 min-h-screen">
       <Navbar />
-      <TitleBlock />
-      <MonthEvent />
+      <EventListSection />
+      <Footer />
     </div>
   );
 };
 
-export default eventlist;
+export default Eventlist;
