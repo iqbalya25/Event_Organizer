@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import Hero from "./Home/Hero";
 
 import Navbar from "./components/Navbar";
-import Gallery from "./dummy/components/Gallery";
+import Gallery from "./Home/Gallery";
 
 export default function Home() {
   return (

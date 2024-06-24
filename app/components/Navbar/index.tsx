@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -76,18 +77,20 @@ const Navbar = () => {
           )}
         </div>
         <a className="btn btn-ghost text-xl">
-          <Image
-            src="/Hannover.png"
-            alt="Hannover Logo"
-            width={65}
-            height={65}
-          />
+          <Link href="/">
+            <Image
+              src="/Hannover.png"
+              alt="Hannover Logo"
+              width={65}
+              height={65}
+            />
+          </Link>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <a>Event</a>
+            <Link href="/eventlist">Event</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <a>Expo</a>
@@ -96,7 +99,7 @@ const Navbar = () => {
             <a>About Us</a>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <a>Dummy</a>
+            <Link href="/dummy">Dummy</Link>
           </li>
         </ul>
       </div>
