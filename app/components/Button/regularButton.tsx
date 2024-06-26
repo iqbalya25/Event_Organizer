@@ -16,7 +16,8 @@ const RegularButton: React.FC<RegularButtonProps> = ({
     <div>
       <Link href={linkbutton}>
         <button
-          className={`mt-6 btn font-bold hover:text-white w-48 ml-0 bg-white hover:${hoverColor} text-black border-transparent rounded-full`}>
+          className={`mt-6 btn font-bold hover:text-white w-48 ml-0 bg-white hover:${hoverColor} text-black border-transparent rounded-full`}
+        >
           {title}
         </button>
       </Link>

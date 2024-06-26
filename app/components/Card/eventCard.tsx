@@ -8,7 +8,7 @@ interface MonthCardProps {
 
 export const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
   return (
-    <div className="flex flex-col mx-36 gap-10">
+    <div className="flex flex-col mx-36 my-36 gap-10">
       {eventsItem.map((monthItem, index) => (
         <div key={index}>
           <div className="bg-red-600 p-5">
