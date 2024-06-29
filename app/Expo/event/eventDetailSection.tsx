@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import RegularButton from "../components/Button/regularButton";
+import RegularButton from "../../components/Button/regularButton";
 
 interface EventDetailSectionProps {
   eventType: string;
@@ -52,13 +52,15 @@ const EventDetailSection: React.FC<EventDetailSectionProps> = ({
             <div className="daisy-collapse daisy-collapse-arrow ">
               <div
                 className="daisy-collapse-title text-lg font-medium cursor-pointer"
-                onClick={toggleAccordion}>
+                onClick={toggleAccordion}
+              >
                 {isOpen ? "Show less" : "Show more"}
               </div>
               <div
                 className={`daisy-collapse-content bg-black overflow-hidden transition-all duration-400 ${
                   isOpen ? "max-h-full" : "max-h-0"
-                }`}>
+                }`}
+              >
                 <p className="p-2">{longDescription}</p>
               </div>
             </div>

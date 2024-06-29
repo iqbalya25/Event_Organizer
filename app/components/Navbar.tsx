@@ -45,7 +45,7 @@ const Navbar = () => {
       <div className="navbar-start">
         <div className="dropdown lg:hidden">
           {isDrawerOpen && (
-            <div className="drawer">
+            <div className="drawer" style={{ zIndex: 30 }}>
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 <label
@@ -55,10 +55,10 @@ const Navbar = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
+                    className="h-8 w-8 bg-white"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="white"
                   >
                     <path
                       strokeLinecap="round"
@@ -77,10 +77,10 @@ const Navbar = () => {
                 ></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-xl">
                   <li>
-                    <Link href="/eventlist">Event</Link>
+                    <Link href="/Expo">Expo</Link>
                   </li>
                   <li>
-                    <Link href="/">Expo</Link>
+                    <Link href="/Partner">Partner</Link>
                   </li>
                   <li>
                     <Link href="/">About Us</Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        <a className="btn btn-ghost text-xl">
+        <div className="btn btn-ghost text-xl">
           <Link href="/">
             <Image
               src="/Hannover.png"
@@ -102,18 +102,18 @@ const Navbar = () => {
               height={65}
             />
           </Link>
-        </a>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-2xl font-bold">
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/eventlist">Event</Link>
+            <Link href="/Expo">Expo</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <a>Expo</a>
+            <Link href="/Partner">Partner</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <a>About Us</a>
+            <Link href="/">About Us</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/dummy">Dummy</Link>
@@ -122,7 +122,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <button
-          className="btn border-none bg-red-600 hover:bg-white text-white hover:bg-black w-36 rounded-full"
+          className="btn border-none bg-red-600 hover:bg-white text-white hover:text-black w-36 rounded-full"
           onClick={() => {
             const modal = document.getElementById(
               "my_modal_1"
@@ -158,6 +158,7 @@ const Navbar = () => {
                       </svg>
                     </button>
                   </form>
+                  m
                 </div>
                 <form
                   className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8"
@@ -218,12 +219,12 @@ const Navbar = () => {
                         </label>
                       </div>
                     </div>
-                    <a
+                    <Link
                       href="#"
                       className="text-sm text-blue-700 hover:underline dark:text-blue-500"
                     >
                       Lost Password?
-                    </a>
+                    </Link>
                   </div>
                   <button
                     type="submit"
@@ -233,12 +234,12 @@ const Navbar = () => {
                   </button>
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     Not registered?{" "}
-                    <a
+                    <Link
                       href="#"
                       className="text-blue-700 hover:underline dark:text-blue-500"
                     >
                       Create account
-                    </a>
+                    </Link>
                   </div>
                 </form>
               </div>

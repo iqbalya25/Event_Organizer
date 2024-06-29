@@ -1,6 +1,6 @@
 import React from "react";
-import SmallButton from "../components/Button/smallButton";
-import SpeakerCard from "../components/Card/speakerCard";
+import SmallButton from "../../components/Button/smallButton";
+import SpeakerCard from "../../components/Card/speakerCard";
 const EventOrganizerSection: React.FC = () => {
   return (
     <div className="py-[64px] px-5 sm:px-10 md:px-14 lg:px-[132px] bg-white">

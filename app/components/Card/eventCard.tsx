@@ -1,4 +1,4 @@
-import { eventsList } from "@/app/eventlist/eventsList";
+import { eventsList } from "@/app/Expo/eventsList";
 import Link from "next/link";
 import React from "react";
 
@@ -6,15 +6,15 @@ interface MonthCardProps {
   eventsItem: eventsList[];
 }
 
-export const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
+const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
   return (
-    <div className="flex flex-col mx-36 my-36 gap-10">
+    <div className="flex flex-col mx-36 my-24 gap-10">
       {eventsItem.map((monthItem, index) => (
         <div key={index}>
           <div className="bg-red-600 p-5">
             <h1 className="text-6xl text-white font-bold">{monthItem.month}</h1>
           </div>
-          <Link href="/event">
+          <Link href="/Expo/event">
             <div className="bg-white text-center p-5 flex flex-col justify-center gap-10 lg:flex-row lg:justify-normal">
               {monthItem.events.map((eventItem, index) => (
                 <div key={index} className="mb-4">
