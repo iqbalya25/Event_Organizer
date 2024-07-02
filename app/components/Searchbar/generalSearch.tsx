@@ -1,6 +1,6 @@
 import React from "react";
 
-const GeneralSearch = () => {
+const GeneralSearch: React.FC = () => {
   return (
     <div className="relative flex flex-col items-center">
       <div className="relative w-full flex items-center">

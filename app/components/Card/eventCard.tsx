@@ -1,4 +1,4 @@
-import { eventsList } from "@/app/Expo/eventsList";
+import { eventsList } from "@/app/expo/eventsList";
 import Link from "next/link";
 import React from "react";
 
@@ -14,10 +14,11 @@ const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
           <div className="bg-red-600 p-5">
             <h1 className="text-6xl text-white font-bold">{monthItem.month}</h1>
           </div>
-          <Link href="/Expo/event">
-            <div className="bg-white text-center p-5 flex flex-col justify-center gap-10 lg:flex-row lg:justify-normal">
-              {monthItem.events.map((eventItem, index) => (
-                <div key={index} className="mb-4">
+
+          <div className="bg-white text-center p-5 flex flex-col justify-center gap-10 lg:flex-row lg:justify-normal">
+            {monthItem.events.map((eventItem, index) => (
+              <div key={index} className="mb-4">
+                <Link href="/expo/event">
                   <h2
                     className="text-2xl font-bold p-4"
                     dangerouslySetInnerHTML={{ __html: eventItem.title }}
@@ -27,10 +28,10 @@ const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
                     dangerouslySetInnerHTML={{ __html: eventItem.description }}
                   ></p>
                   <p className="text-gray-500 p-4">{eventItem.date}</p>
-                </div>
-              ))}
-            </div>
-          </Link>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>

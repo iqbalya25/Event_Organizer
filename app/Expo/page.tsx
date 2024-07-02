@@ -1,8 +1,9 @@
+import React from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/Navbar";
 import EventListSection from "./eventListSection";
 
-export const Eventlist = () => {
+const Eventlist: React.FC = () => {
   return (
     <div className="bg-gray-300 min-h-screen">
       <Navbar />

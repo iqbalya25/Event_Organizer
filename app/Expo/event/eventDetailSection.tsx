@@ -1,7 +1,7 @@
 "use client";
+import RegularButton from "@/app/components/Button/regularButton";
 import Image from "next/image";
 import React, { useState } from "react";
-import RegularButton from "../../components/Button/regularButton";
 
 interface EventDetailSectionProps {
   eventType: string;

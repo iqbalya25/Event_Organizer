@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import regularButton from "./Button/regularButton";
 import SmallButton from "./Button/smallButton";
 import CustomButton from "./Button/customButton";
+import RedButton from "./Button/redButton";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
@@ -77,10 +78,10 @@ const Navbar = () => {
                 ></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-xl">
                   <li>
-                    <Link href="/Expo">Expo</Link>
+                    <Link href="/expo">Expo</Link>
                   </li>
                   <li>
-                    <Link href="/Partner">Partner</Link>
+                    <Link href="/partner">Partner</Link>
                   </li>
                   <li>
                     <Link href="/">About Us</Link>
@@ -107,13 +108,13 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-2xl font-bold">
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/Expo">Expo</Link>
+            <Link href="/expo">Expo</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/Partner">Partner</Link>
+            <Link href="/partner">Partner</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/">About Us</Link>
+            <Link href="/about">About Us</Link>
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/dummy">Dummy</Link>
@@ -121,7 +122,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <button
+        {/* <button
           className="btn border-none bg-red-600 hover:bg-white text-white hover:text-black w-36 rounded-full"
           onClick={() => {
             const modal = document.getElementById(
@@ -133,7 +134,20 @@ const Navbar = () => {
           }}
         >
           <p className="p-3 tex-2xl font-bold">Login</p>
-        </button>
+        </button> */}
+
+        <RedButton
+          title="Login"
+          onClick={() => {
+            const modal = document.getElementById(
+              "my_modal_1"
+            ) as HTMLDialogElement | null;
+            if (modal) {
+              modal.showModal();
+            }
+          }}
+        ></RedButton>
+
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box">
             <div className="modal-action flex items-center justify-center">
@@ -235,7 +249,7 @@ const Navbar = () => {
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     Not registered?{" "}
                     <Link
-                      href="#"
+                      href="/registration/guest"
                       className="text-blue-700 hover:underline dark:text-blue-500"
                     >
                       Create account

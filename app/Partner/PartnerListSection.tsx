@@ -1,7 +1,6 @@
 import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
 import CompanyCard from "../components/Card/companyCard";
-import Partnerlist from "./page";
 import { PartnersList } from "./partnerList";
 
 export const PartnerListSection = () => {

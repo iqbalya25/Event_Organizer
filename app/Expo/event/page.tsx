@@ -1,13 +1,12 @@
 import React from "react";
-import RegularButton from "../../components/Button/regularButton";
-import SpeakerCard from "../../components/Card/speakerCard";
-import Footer from "../../components/footer";
-import Navbar from "../../components/Navbar";
+
 import EventDetailSection from "./eventDetailSection";
 import EventOrganizerSection from "./eventOrganizerSection";
 import EventSpeakersSection from "./eventSpeakersSection";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/footer";
 
-export default function Home() {
+const EventDetail: React.FC = () => {
   return (
     <main>
       <Navbar />
@@ -31,4 +30,6 @@ export default function Home() {
       <Footer />
     </main>
   );
-}
+};
+
+export default EventDetail;

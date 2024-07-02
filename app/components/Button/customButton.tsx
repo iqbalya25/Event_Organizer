@@ -24,7 +24,7 @@ const CustomButton: React.FC<customButtonProps> = ({
     <div className={`group ${textColor}`}>
       <Link href={linkbutton}>
         <button
-          className={`mt-6 font-bold hover:text-white ${size} ml-0 ${backgroundColor} hover:${backgroundHoverColor} ${textColor} hover:${textColorHover} border-transparent rounded-full`}
+          className={`mt-6 font-bold ${size} ml-0 ${backgroundColor} hover:${backgroundHoverColor} ${textColor} hover:${textColorHover} border-transparent rounded-full`}
         >
           {title}
         </button>

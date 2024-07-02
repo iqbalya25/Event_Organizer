@@ -1,5 +1,5 @@
+import SpeakerCard from "@/app/components/Card/speakerCard";
 import React from "react";
-import SpeakerCard from "../../components/Card/speakerCard";
 
 const EventSpeakersSection: React.FC = () => {
   return (
