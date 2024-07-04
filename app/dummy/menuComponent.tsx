@@ -11,7 +11,7 @@ const MenuComponent = () => {
   };
 
   return (
-    <div className="bg-white pt-32">
+    <div className="bg-black pt-32">
       <button
         onClick={() => showMenu("menu1")}
         disabled={activeMenu === "menu1"}

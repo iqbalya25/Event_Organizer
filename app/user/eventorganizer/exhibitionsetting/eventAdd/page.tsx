@@ -1,10 +1,10 @@
 import React from "react";
-import DashboardSection from "./dashboardSection";
+import EventForm from "./formSection";
 
 const EODashboard = () => {
   return (
     <div>
-      <DashboardSection />
+      <EventForm onAddEvent={handleAddEvent} />
     </div>
   );
 };

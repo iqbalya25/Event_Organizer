@@ -22,7 +22,7 @@ const EventCard: React.FC<MonthCardProps> = ({ eventsItem }) => {
               {monthItem.events.map((eventItem, index) => (
                 <div
                   key={index}
-                  className="mb-4 flex-shrink-0 border-r-2 border-gray-300"
+                  className="mb-4 flex-shrink-0 border-2 border-gray-300"
                 >
                   <Link href="/expo/event">
                     <h2
