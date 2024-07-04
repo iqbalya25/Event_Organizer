@@ -47,25 +47,25 @@ const Countdown: React.FC = () => {
       </h1>
       <div className="grid grid-flow-row lg:grid-flow-col gap-16 text-center auto-cols-max justify-center bg-red-600 text-white px-32 py-16">
         <div className="flex flex-col">
-          <span className="countdown font-mono text-8xl font-bold">
+          <span className="countdown font-mono flex justify-center text-6xl md:text-8xl font-bold">
             <span style={{ "--value": days } as React.CSSProperties}></span>
           </span>
           days
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-mono text-8xl font-bold">
+          <span className="countdown font-mono flex justify-center text-6xl md:text-8xl  font-bold">
             <span style={{ "--value": hours } as React.CSSProperties}></span>
           </span>
           hours
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-mono text-8xl font-bold">
+          <span className="countdown font-mono flex justify-center text-6xl md:text-8xl font-bold">
             <span style={{ "--value": minutes } as React.CSSProperties}></span>
           </span>
           min
         </div>
         <div className="flex flex-col">
-          <span className="countdown font-mono text-8xl font-bold">
+          <span className="countdown font-mono flex justify-center text-6xl md:text-8xl font-bold">
             <span style={{ "--value": counter } as React.CSSProperties}></span>
           </span>
           sec
