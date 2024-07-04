@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar h-24 fixed top-0 left-0 w-full z-30 transition-all duration-100 text-white items-center ${
+      className={`navbar h-24 fixed top-0 left-0 w-full z-30 transition-all duration-100 text-white items-center justify-start md:justify-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
       }`}
     >
