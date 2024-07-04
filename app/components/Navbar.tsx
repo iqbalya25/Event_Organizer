@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar h-24 fixed top-0 left-0 w-full z-20 transition-all duration-100 text-white items-center ${
+      className={`navbar h-24 fixed top-0 left-0 w-full z-30 transition-all duration-100 text-white items-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
       }`}
     >
@@ -56,7 +56,7 @@ const Navbar = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 bg-white"
+                    className="h-8 w-8"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="white"
