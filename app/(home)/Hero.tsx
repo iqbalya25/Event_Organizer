@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import FloatMenu from "./FloatingMenu";
 
 const Hero = () => {
   return (
@@ -8,7 +9,8 @@ const Hero = () => {
         autoPlay
         loop
         muted
-        className="absolute inset-0 w-full h-full object-cover">
+        className="absolute inset-0 w-full h-full object-cover"
+      >
         <source
           src="https://res.cloudinary.com/djyevwtie/video/upload/v1718554165/assetmp/qn7hf3parz4o7oe3e4ba.mp4"
           type="video/mp4"
@@ -43,6 +45,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      <FloatMenu />
     </div>
   );
 };

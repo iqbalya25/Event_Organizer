@@ -1,6 +1,6 @@
-const FloatMenu = () => {
+const StaticMenu = () => {
   return (
-    <div className="hidden lg:relative w-11/12 lg:w-10/12 bottom-44 left-1/2 transform -translate-x-1/2 z-20 lg:flex lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 p-4 md:absolute bg-gray-800 bg-opacity-50 rounded-lg">
+    <div className="z-20 flex flex-col p-4 bg-gray-800 bg-opacity-50 gap-5 justify-center lg:hidden">
       <div className="flex-1 p-4 bg-black text-white hover:bg-white hover:text-black transition-colors duration-300 rounded-lg">
         <h3 className="font-bold">After Show Report #HM24</h3>
         <p>
@@ -22,4 +22,4 @@ const FloatMenu = () => {
     </div>
   );
 };
-export default FloatMenu;
+export default StaticMenu;

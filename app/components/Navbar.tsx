@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar h-24 fixed top-0 left-0 w-full z-20 transition-all duration-300 text-white items-center ${
+      className={`navbar h-24 fixed top-0 left-0 w-full z-20 transition-all duration-100 text-white items-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
       }`}
     >
@@ -84,10 +84,10 @@ const Navbar = () => {
                     <Link href="/partner">Partner</Link>
                   </li>
                   <li>
-                    <Link href="/">About Us</Link>
+                    <Link href="/about">About Us</Link>
                   </li>
                   <li>
-                    <Link href="/">Dummy</Link>
+                    <Link href="/dummy">Dummy</Link>
                   </li>
                 </ul>
               </div>

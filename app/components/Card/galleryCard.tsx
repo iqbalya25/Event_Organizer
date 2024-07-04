@@ -7,11 +7,11 @@ interface CardProps {
   label: string;
 }
 
-const Card: React.FC<CardProps> = ({ imgSrc, altText, label }) => {
+const GalleryCard: React.FC<CardProps> = ({ imgSrc, altText, label }) => {
   return (
     <a
       href="#"
-      className="group relative flex h-48 items-end justify-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-96 hover:shadow-red-500 transition-shadow duration-200"
+      className="group relative flex h-48 items-end justify-end overflow-hidden  shadow-lg md:h-96 hover:border-red-600 border-transparent border-b-8 border-l-8 transition-all duration-200"
     >
       <img
         src={imgSrc}
@@ -27,4 +27,4 @@ const Card: React.FC<CardProps> = ({ imgSrc, altText, label }) => {
   );
 };
 
-export default Card;
+export default GalleryCard;

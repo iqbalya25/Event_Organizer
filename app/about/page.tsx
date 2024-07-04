@@ -9,7 +9,6 @@ const About: React.FC = () => {
     <div className="bg-gray-300 min-h-screen">
       <Navbar />
       <AboutSection />
-      <VideoReview src="./HannoverHighlight.webm" /> {/* Added VideoReview */}
       <Footer />
     </div>
   );

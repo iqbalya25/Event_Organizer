@@ -6,8 +6,8 @@ interface VideoReviewProps {
 
 const VideoReview: React.FC<VideoReviewProps> = ({ src }) => {
   return (
-    <div>
-      <video src={src} className="p-44" controls></video>
+    <div className="h-fit bg-black">
+      <video src={src} className="p-16" controls></video>
     </div>
   );
 };

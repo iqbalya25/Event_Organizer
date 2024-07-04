@@ -4,7 +4,7 @@ import React from "react";
 const RegistrationSection = () => {
   return (
     <div>
-      <h1 className="text-xl lg:text-6xl pt-32 pb-8 bg-black text-white font-bold flex justify-center items-center">
+      <h1 className="text-xl lg:text-6xl pt-32 pb-16 bg-black text-white font-bold flex justify-center items-center">
         Online Registration
       </h1>
       <div className="flex flex-row justify-center gap-20 mt-10 text-white font-bold">

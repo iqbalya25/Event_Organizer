@@ -11,9 +11,9 @@ const AboutSection = () => {
       >
         <div
           style={{ width: "60vw" }}
-          className="flex flex-col max-w-4xl mx-auto pl-20 justify-start"
+          className="flex flex-col w-fit mx-auto md:pl-16 justify-start"
         >
-          <h1 className="text-2xl font-bold mb-5 md:text-3xl lg:text-8xl">
+          <h1 className="justify-center text-2xl font-bold mb-5 md:text-3xl lg:text-8xl">
             Facts & Figures of KUKIVENT
           </h1>
           <p className="text-xl text-justify md:text-2xl lg:text-4xl">
