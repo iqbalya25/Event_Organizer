@@ -1,14 +1,13 @@
 import React from "react";
-import Link from "next/link";
 
-interface ServiceCardProps {
+interface LocationCardProps {
   title: string;
   description: string;
   link: string;
   icon: string;
 }
 
-const LocationCard: React.FC<ServiceCardProps> = ({
+const LocationCard: React.FC<LocationCardProps> = ({
   title,
   description,
   link,
