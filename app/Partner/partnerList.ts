@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface partnersList {
+export interface Partner {
   logo: ReactNode;
   status: string;
   companyname: string;
@@ -9,7 +9,7 @@ export interface partnersList {
   stand: string;
 }
 
-export const PartnersList: partnersList[] = [
+export const PartnersList: Partner[] = [
   {
     logo: "./logo1.png",
     status: "exhibitors2024",
