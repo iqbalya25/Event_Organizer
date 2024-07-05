@@ -38,7 +38,7 @@ export const PartnersList: partnersList[] = [
   {
     logo: "./logo4.png",
     status: "conferences2024",
-    companyname: "MITSUBISHI ELECTRIc",
+    companyname: "MITSUBISHI ELECTRIC",
     location: "Japan",
     description: "Automation Company",
     stand: "Hall C B2",
