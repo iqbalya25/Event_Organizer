@@ -1,12 +1,10 @@
 "use client";
-import { eventsList } from "@/app/expo/eventsList";
+
+import { useEvent } from "@/app/expo/eventProvider";
 import React, { useState } from "react";
 
-interface EventFormProps {
-  onAddEvent: (newEvent: eventsList) => void;
-}
-
-const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
+const EventForm: React.FC = () => {
+  const { addEvent } = useEvent();
   const [month, setMonth] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,7 +13,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newEvent: eventsList = {
+    const newEvent = {
       month,
       events: [
         {
@@ -26,7 +24,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
       ],
     };
 
-    onAddEvent(newEvent);
+    addEvent(newEvent);
     setMonth("");
     setTitle("");
     setDescription("");

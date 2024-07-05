@@ -4,7 +4,7 @@ import EventForm from "./formSection";
 const EODashboard = () => {
   return (
     <div>
-      <EventForm onAddEvent={handleAddEvent} />
+      <EventForm />
     </div>
   );
 };

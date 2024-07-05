@@ -1,15 +1,15 @@
-export interface eventsList {
-  month: string;
-  events: eventsItem[];
-}
-
-export interface eventsItem {
+export interface EventItem {
   title: string;
   description: string;
   date: string;
 }
 
-export const EventsList: eventsList[] = [
+export interface EventsList {
+  month: string;
+  events: EventItem[];
+}
+
+export const initialEvents: EventsList[] = [
   {
     month: "June",
     events: [
