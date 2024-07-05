@@ -1,13 +1,16 @@
 import React from "react";
-import Abb from "./abb";
+import Abb from "./companytitle";
 import Product from "./product";
+import CompanyDetail from "./companydetail";
+import CompanyTitle from "./companytitle";
 
 const ReservationEX = () => {
   return (
     <div>
       <div>
-        <Abb />
+        <CompanyTitle />
         <Product />
+        <CompanyDetail />
       </div>
     </div>
   );
