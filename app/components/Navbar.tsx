@@ -97,10 +97,10 @@ const Navbar = () => {
         <div className="btn btn-ghost text-xl">
           <Link href="/">
             <Image
-              src="/Hannover.png"
+              src="/kukivent.png"
               alt="Hannover Logo"
-              width={65}
-              height={65}
+              width={50}
+              height={50}
             />
           </Link>
         </div>
