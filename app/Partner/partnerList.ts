@@ -9,7 +9,7 @@ export interface Partner {
   stand: string;
 }
 
-export const PartnersList: Partner[] = [
+const PartnersList: Partner[] = [
   {
     logo: "./logo1.png",
     status: "exhibitors2024",
@@ -43,3 +43,5 @@ export const PartnersList: Partner[] = [
     stand: "Hall C B2",
   },
 ];
+
+export default PartnersList;

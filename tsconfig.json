@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/expo/eventlist/components/MonthEvents",
-    "app/expo/eventlist/components/EventItem"
+    "app/expo/eventlist/components/EventItem",
+    "app/partner/partnerList"
   ],
   "exclude": ["node_modules"]
 }
