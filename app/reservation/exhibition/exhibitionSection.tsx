@@ -45,7 +45,7 @@ const BookExhibition = () => {
       </div>
 
       {activeMenu && (
-        <div className="mt-4 px-32 bg-gray-200 p-4 rounded shadow">
+        <div className="mt-4 px-16 bg-gray-200 p-4 rounded shadow">
           {activeMenu === "menu1" && <ExhibitionHallA />}
           {activeMenu === "menu2" && <ExhibitionHallB />}
           {activeMenu === "menu3" && <ExhibitionHallC />}
