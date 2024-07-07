@@ -1,17 +1,17 @@
 "use client";
 import React from "react";
 import HallALayout from "./layout/hallA";
+import PaymentSection from "@/app/payment/paymentSection";
 
 const ExhibitionHallA = () => {
   return (
     <div>
-      <div className="mb-4 ">
+      <div className="mb-4 mx-auto ">
         <h1 className="mb-2 text-2xl font-bold">Hall A Details</h1>
         <HallALayout />
         <p className="mb-2">
           Layout: Large open space suitable for exhibitions and events.
         </p>
-        <p className="mb-2">Price: $1000 per day</p>
         <p className="mb-2">Total Area: 5000 square feet</p>
         <p className="mb-2">Area per Booth: 100 square feet</p>
         <h2 className="mt-4 mb-2 text-xl font-bold">Facilities</h2>
@@ -27,7 +27,7 @@ const ExhibitionHallA = () => {
           <li>Dedicated Event Management Team</li>
         </ul>
       </div>
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label htmlFor="block" className="block mb-2">
           Select Block:
         </label>
@@ -76,7 +76,8 @@ const ExhibitionHallA = () => {
         >
           Book Now
         </button>
-      </form>
+      </form> */}
+      <PaymentSection />
     </div>
   );
 };

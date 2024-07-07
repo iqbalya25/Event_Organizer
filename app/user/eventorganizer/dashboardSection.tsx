@@ -3,6 +3,7 @@ import React from "react";
 import ServiceCard from "@/app/components/Card/serviceCard";
 import StatsCard from "@/app/components/statcard";
 import GuestAttendanceGraph from "@/app/components/guestgraph";
+import TransactionsList from "@/app/components/transactionlist";
 
 const DashboardOrganizerSection: React.FC = () => {
   // Example data, replace this with actual data from your backend
@@ -32,7 +33,7 @@ const DashboardOrganizerSection: React.FC = () => {
           <h2 className="text-2xl text-black font-bold mb-4">
             Booth and Conference Settings
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ServiceCard
               link="#"
               title="Manage Booths"
@@ -60,6 +61,10 @@ const DashboardOrganizerSection: React.FC = () => {
       <section className="container mx-auto p-4">
         <h2 className="text-2xl font-bold mb-4">Guest Attendance Overview</h2>
         <GuestAttendanceGraph />
+      </section>
+      <section className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Transactions</h2>
+        <TransactionsList />
       </section>
     </div>
   );

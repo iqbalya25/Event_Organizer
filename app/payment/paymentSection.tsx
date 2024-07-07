@@ -1,51 +1,34 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import PaymentList from "./paymentList";
+import { Payment } from "./paymentModel";
+import PaymentForm from "./paymentForm";
+import PaymentConfirmation from "./paymentconfirmation";
 
 const PaymentSection = () => {
+  const [payments, setPayments] = useState<Payment[]>([]);
+  const [currentPayment, setCurrentPayment] = useState<Payment | null>(null);
+
+  const handleAddPayment = (payment: Payment) => {
+    setPayments([...payments, payment]);
+    setCurrentPayment(payment);
+  };
+
   return (
-    <div className="mt-4 bg-gray-200 ">
-      <h1 className="text-xl lg:text-6xl pt-32 pb-8 bg-black text-white font-bold flex justify-center items-center">
-        Payment Details
-      </h1>
-      <div className="px-32 py-24">
-        <form className="flex flex-col gap-4 mt-4">
-          <label>
-            Cardholder Name:
-            <input
-              type="text"
-              className="border-2 border-gray-400 p-2 mt-1 w-full"
-            />
-          </label>
-          <label>
-            Card Number:
-            <input
-              type="text"
-              className="border-2 border-gray-400 p-2 mt-1 w-full"
-            />
-          </label>
-          <label>
-            Expiry Date:
-            <input
-              type="text"
-              className="border-2 border-gray-400 p-2 mt-1 w-full"
-              placeholder="MM/YY"
-            />
-          </label>
-          <label>
-            CVV:
-            <input
-              type="text"
-              className="border-2 border-gray-400 p-2 mt-1 w-full"
-            />
-          </label>
-          <br />
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-4 py-2 rounded"
-          >
-            Pay Now
-          </button>
-        </form>
-      </div>
+    <div>
+      <section className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Reservation</h2>
+        <PaymentForm onSubmit={handleAddPayment} />
+      </section>
+      <section className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Payment Confirmation</h2>
+        {currentPayment && <PaymentConfirmation payment={currentPayment} />}
+      </section>
+      <section className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Payment List</h2>
+        <PaymentList payments={payments} />
+      </section>
     </div>
   );
 };
