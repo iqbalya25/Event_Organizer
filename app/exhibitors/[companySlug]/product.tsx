@@ -1,27 +1,3 @@
-// import React from "react";
-
-// interface ProductProps {
-//   products: string[];
-// }
-
-// const Product: React.FC<ProductProps> = ({ products }) => {
-//   return (
-//     <div className="px-16">
-//       <div className="border-red-600 border-y-8 flex flex-col justify-center items-center gap-10 py-16 ">
-//         <h1 className="text-5xl font-bold">Product</h1>
-//         <div className="w-[200px] h-[200px] border border-gray-200"></div>
-//         <div>
-//           {products.map((product, index) => (
-//             <p key={index}>{product}</p>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Product;
-
 import React from "react";
 
 const Product: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Payment } from "./paymentModel";
+import { Payment } from "../../types/paymentModel";
 
 interface PaymentConfirmationProps {
   payment: Payment;

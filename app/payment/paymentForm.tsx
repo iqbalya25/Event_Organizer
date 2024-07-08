@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Payment } from "./paymentModel";
+import { Payment } from "../../types/paymentModel";
 
 interface ReservationFormProps {
   onSubmit: (payment: Payment) => void;
