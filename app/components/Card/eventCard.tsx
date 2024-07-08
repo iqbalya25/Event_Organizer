@@ -1,4 +1,4 @@
-import { eventsList } from "@/app/expo/eventsList";
+import { eventsList } from "@/types/eventTypes";
 import Link from "next/link";
 import React from "react";
 
