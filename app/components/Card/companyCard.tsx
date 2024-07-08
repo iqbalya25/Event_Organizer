@@ -1,4 +1,4 @@
-import { Partner } from "@/app/partner/partnerList";
+import { Partner } from "@/types/partner";
 import React from "react";
 
 interface PartnerCardProps {

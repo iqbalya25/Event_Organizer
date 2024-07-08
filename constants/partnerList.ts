@@ -1,13 +1,6 @@
-export interface Partner {
-  logo: string;
-  status: string;
-  companyname: string;
-  location: string;
-  description: string;
-  stand: string;
-}
+import { Partner } from "@/types/partner";
 
-const PartnersList: Partner[] = [
+export const PartnersList: Partner[] = [
   {
     logo: "./logo1.png",
     status: "exhibitors2024",
@@ -41,5 +34,3 @@ const PartnersList: Partner[] = [
     stand: "Hall C B2",
   },
 ];
-
-export default PartnersList;
