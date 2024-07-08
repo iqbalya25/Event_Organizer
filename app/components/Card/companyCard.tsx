@@ -1,8 +1,8 @@
-import PartnersList from "@/app/partner/partnerList";
+import { Partner } from "@/app/partner/partnerList";
 import React from "react";
 
 interface PartnerCardProps {
-  partnersItem: typeof PartnersList;
+  partnersItem: Partner[];
 }
 
 const CompanyCard: React.FC<PartnerCardProps> = ({ partnersItem }) => {

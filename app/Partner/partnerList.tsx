@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Partner {
   logo: string;
   status: string;
