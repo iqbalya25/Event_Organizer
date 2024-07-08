@@ -1,7 +1,5 @@
-import { ReactNode } from "react";
-
 export interface Partner {
-  logo: ReactNode;
+  logo: string;
   status: string;
   companyname: string;
   location: string;
