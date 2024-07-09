@@ -1,5 +1,5 @@
 import React from "react";
-import { Payment } from "./paymentModel";
+import { Payment } from "../../types/paymentModel";
 
 interface PaymentListProps {
   payments: Payment[];
@@ -15,6 +15,7 @@ const PaymentList: React.FC<PaymentListProps> = ({ payments }) => {
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Company</th>
               <th className="py-3 px-6 text-left">Amount</th>
+              <th className="py-3 px-6 text-center">Code Referal</th>
               <th className="py-3 px-6 text-center">Date</th>
               <th className="py-3 px-6 text-center">Status</th>
             </tr>
@@ -29,6 +30,7 @@ const PaymentList: React.FC<PaymentListProps> = ({ payments }) => {
                 <td className="py-3 px-6 text-left">
                   ${payment.amount.toLocaleString()}
                 </td>
+                <td className="py-3 px-6 text-center">{payment.codeReferal}</td>
                 <td className="py-3 px-6 text-center">
                   {new Date(payment.date).toLocaleDateString()}
                 </td>

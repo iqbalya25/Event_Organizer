@@ -30,7 +30,7 @@ const DashboardSection = () => {
       <section className="py-8 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl text-black font-bold mb-4">Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <ServiceCard
               link="#"
               title="User Account"
@@ -38,15 +38,15 @@ const DashboardSection = () => {
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
-              link="#"
-              title="Exhibition"
-              description="Book Booth For Exhibition"
+              link="/reservation/exhibition"
+              title="Exhibition & Conference"
+              description="Book Booth For Exhibition or Conference"
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
-              link="#"
-              title="Conference"
-              description="Book Booth For Conference"
+              link="/company/productform"
+              title="Add Product"
+              description="Add your product for company information"
               icon="fi fi-ts-arrow-right"
             />
           </div>

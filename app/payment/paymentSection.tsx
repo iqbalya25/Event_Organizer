@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import PaymentList from "./paymentList";
-import { Payment } from "./paymentModel";
+import { Payment } from "../../types/paymentModel";
 import PaymentForm from "./paymentForm";
 import PaymentConfirmation from "./paymentconfirmation";
 

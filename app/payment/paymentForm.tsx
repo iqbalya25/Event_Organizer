@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Payment } from "./paymentModel";
+import { Payment } from "../../types/paymentModel";
 
 interface ReservationFormProps {
   onSubmit: (payment: Payment) => void;
@@ -28,6 +28,7 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
     email: "",
     reservationDate: "",
     amount: price,
+    codeReferal: "",
     status: "Pending",
   };
 
@@ -61,6 +62,7 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
       email: values.email,
       reservationDate: values.reservationDate,
       amount: values.amount,
+      codeReferal: values.codeReferal,
       date: new Date().toISOString().split("T")[0],
       status: values.status,
     };
@@ -179,6 +181,25 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
               value={`$${price}`}
               disabled
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 sm:text-sm"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="companyName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Code Referal
+            </label>
+            <Field
+              type="text"
+              id="codeReferal"
+              name="codeReferal"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+            <ErrorMessage
+              name="codeReferal"
+              component="div"
+              className="text-red-500 text-sm mt-1"
             />
           </div>
           <button
