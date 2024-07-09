@@ -44,7 +44,7 @@ const DashboardSection = () => {
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
-              link="/reservation/exhibition"
+              link="/company/productform"
               title="Add Product"
               description="Add your product for company information"
               icon="fi fi-ts-arrow-right"

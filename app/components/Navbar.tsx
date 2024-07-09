@@ -122,20 +122,6 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {/* <button
-          className="btn border-none bg-red-600 hover:bg-white text-white hover:text-black w-36 rounded-full"
-          onClick={() => {
-            const modal = document.getElementById(
-              "my_modal_1"
-            ) as HTMLDialogElement | null;
-            if (modal) {
-              modal.showModal();
-            }
-          }}
-        >
-          <p className="p-3 tex-2xl font-bold">Login</p>
-        </button> */}
-
         <RedButton
           title="Login"
           onClick={() => {

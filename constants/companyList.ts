@@ -1,4 +1,6 @@
-import { Company } from "@/types/companyProdct";
+// data/companiesData.ts
+
+import { Company } from "@/types/companyProduct";
 
 export const staticData: Company[] = [
   {
@@ -15,22 +17,19 @@ export const staticData: Company[] = [
     address: "123 Main St",
     country: "Country 1",
     description: "Description for Company 1",
-    products: ["Product 1", "Product 2", "Product 3"],
-  },
-  {
-    slug: "company-2",
-    status: "Inactive",
-    title: "Company 2",
-    location: {
-      description: "Hall B B3",
-      icon: "B",
-      link: "",
-      title: "Hall B",
-    },
-    name: "Company 2",
-    address: "456 Elm St",
-    country: "Country 2",
-    description: "Description for Company 2",
-    products: ["Product A", "Product B", "Product C"],
+    products: [
+      {
+        id: "prod1",
+        name: "Product 1",
+        description: "This is a description for Product 1",
+        photoUrl: "/images/product1.jpg",
+      },
+      {
+        id: "prod2",
+        name: "Product 2",
+        description: "This is a description for Product 2",
+        photoUrl: "/images/product2.jpg",
+      },
+    ],
   },
 ];
