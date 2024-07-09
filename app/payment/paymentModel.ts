@@ -7,4 +7,5 @@ export interface Payment {
   block: string;
   email: string;
   reservationDate: string;
+  codeReferal: string;
 }

@@ -16,6 +16,7 @@ const PaymentConfirmation: React.FC<PaymentConfirmationProps> = ({
       <p>Email: {payment.email}</p>
       <p>Reservation Date: {payment.reservationDate}</p>
       <p>Amount: ${payment.amount}</p>
+      <p>Code Referal: {payment.codeReferal}</p>
       <p>Status: {payment.status}</p>
       <p>Date: {new Date(payment.date).toLocaleDateString()}</p>
     </div>

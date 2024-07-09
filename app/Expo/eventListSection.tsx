@@ -2,7 +2,7 @@ import React from "react";
 
 import GeneralSearch from "../components/Searchbar/generalSearch";
 import EventCard from "../components/Card/eventCard";
-import { EventsList } from "./eventsList";
+import { EventsList } from "@/constants/eventList";
 
 const EventListSection: React.FC = () => {
   return (
