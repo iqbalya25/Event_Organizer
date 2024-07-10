@@ -3,64 +3,78 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-interface EOSignUpFormValues {
+interface EventOrganizerRegisterFormValues {
   name: string;
   email: string;
+  password: string;
+  phoneNumber: string;
   address: string;
   city: string;
-  password: string;
-  contactNumber: string;
+  websiteUrl: string;
 }
 
 const RegistrationFormEO: React.FC = () => {
-  const initialValues: EOSignUpFormValues = {
+  const initialValues: EventOrganizerRegisterFormValues = {
     name: "",
     email: "",
+    password: "",
+    phoneNumber: "",
     address: "",
     city: "",
-    password: "",
-    contactNumber: "",
+    websiteUrl: "",
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required("Organizer name is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    address: Yup.string().required("Address is required"),
-    city: Yup.string().required("City is required"),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
-    contactNumber: Yup.string().required("Contact number is required"),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    address: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
+    websiteUrl: Yup.string()
+      .url("Invalid URL")
+      .required("Website URL is required"),
   });
 
-  const handleSubmit = async (values: EOSignUpFormValues) => {
+  const handleSubmit = async (values: EventOrganizerRegisterFormValues) => {
+    console.log("Form Values:", values); // Print form values to the console
+
     try {
-      const response = await fetch("/api/eo-signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Failed to sign up");
+        const errorData = await response.json();
+        console.error("Failed to register:", errorData);
+        throw new Error("Failed to register");
       }
 
       const data = await response.json();
-      console.log("EO signed up successfully:", data);
-      alert("EO signed up successfully!"); // Add user feedback here
+      console.log("Event organizer registered successfully:", data);
+      alert("Event organizer registered successfully!"); // Add user feedback here
     } catch (error) {
-      console.error("Error signing up EO:", error);
-      alert("Error signing up EO, please try again later."); // Add user feedback here
+      console.error("Error registering event organizer:", error);
+      alert("Error registering event organizer, please try again later."); // Add user feedback here
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 my-20 border border-1 shadow-md">
-      <h1 className="text-2xl font-bold mb-4">EO Sign Up</h1>
+    <div className="max-w-md mx-auto bg-white p-8 my-20 border border-gray-300 rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">
+        Register Event Organizer
+      </h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -70,15 +84,15 @@ const RegistrationFormEO: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
-              Name
+              Organizer Name
             </label>
             <Field
               id="name"
               name="name"
               type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="name"
@@ -90,7 +104,7 @@ const RegistrationFormEO: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Email
             </label>
@@ -98,7 +112,7 @@ const RegistrationFormEO: React.FC = () => {
               id="email"
               name="email"
               type="email"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="email"
@@ -109,8 +123,48 @@ const RegistrationFormEO: React.FC = () => {
 
           <div className="mb-4">
             <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <Field
+              id="password"
+              name="password"
+              type="password"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone Number
+            </label>
+            <Field
+              id="phoneNumber"
+              name="phoneNumber"
+              type="text"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <ErrorMessage
+              name="phoneNumber"
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
               htmlFor="address"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Address
             </label>
@@ -118,7 +172,7 @@ const RegistrationFormEO: React.FC = () => {
               id="address"
               name="address"
               type="text"
-              className="mt-1 block w-full text-black border bg-gray-200 border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="address"
@@ -130,7 +184,7 @@ const RegistrationFormEO: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="city"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               City
             </label>
@@ -138,7 +192,7 @@ const RegistrationFormEO: React.FC = () => {
               id="city"
               name="city"
               type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="city"
@@ -149,50 +203,30 @@ const RegistrationFormEO: React.FC = () => {
 
           <div className="mb-4">
             <label
-              htmlFor="password"
-              className="block text-sm font-medium text-black"
+              htmlFor="websiteUrl"
+              className="block text-sm font-medium text-gray-700"
             >
-              Password
+              Website URL
             </label>
             <Field
-              id="password"
-              name="password"
-              type="password"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              id="websiteUrl"
+              name="websiteUrl"
+              type="url"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
-              name="password"
+              name="websiteUrl"
               component="div"
               className="text-red-500 text-sm"
             />
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="contactNumber"
-              className="block text-sm font-medium text-black"
-            >
-              Phone Number
-            </label>
-            <Field
-              id="contactNumber"
-              name="contactNumber"
-              type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
-            />
-            <ErrorMessage
-              name="contactNumber"
-              component="div"
-              className="text-red-500 text-sm"
-            />
-          </div>
-
-          <div>
+          <div className="mt-6">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md"
+              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
             >
-              Sign Up
+              Register Organizer
             </button>
           </div>
         </Form>

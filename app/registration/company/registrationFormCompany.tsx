@@ -3,72 +3,81 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-interface RegisterFormValues {
+interface CompanyRegisterFormValues {
   name: string;
   email: string;
-  website: string;
+  password: string;
+  phoneNumber: string;
   address: string;
   city: string;
-  password: string;
-  contactNumber: string;
-  referralCode?: string;
+  websiteUrl: string;
+  referralCode: string;
 }
 
-const RegisterFormGuest: React.FC = () => {
-  const initialValues: RegisterFormValues = {
+const CompanyRegisterForm: React.FC = () => {
+  const initialValues: CompanyRegisterFormValues = {
     name: "",
     email: "",
-    website: "",
+    password: "",
+    phoneNumber: "",
     address: "",
     city: "",
-    password: "",
-    contactNumber: "",
+    websiteUrl: "",
     referralCode: "",
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required("Company name is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    website: Yup.string()
-      .url("Invalid URL")
-      .required("Website URL is required"),
-    address: Yup.string().required("Address is required"),
-    city: Yup.string().required("City is required"),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
-    contactNumber: Yup.string().required("Contact number is required"),
-    referralCode: Yup.string().optional(),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    address: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
+    websiteUrl: Yup.string()
+      .url("Invalid URL")
+      .required("Website URL is required"),
+    referralCode: Yup.string().required("Referral code is required"),
   });
 
-  const handleSubmit = async (values: RegisterFormValues) => {
+  const handleSubmit = async (values: CompanyRegisterFormValues) => {
+    console.log("Form Values:", values); // Print form values to the console
+
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to register:", errorData);
         throw new Error("Failed to register");
       }
 
       const data = await response.json();
-      console.log("User registered successfully:", data);
-      alert("User registered successfully!"); // Add user feedback here
+      console.log("Company registered successfully:", data);
+      alert("Company registered successfully!"); // Add user feedback here
     } catch (error) {
-      console.error("Error registering user:", error);
-      alert("Error registering user, please try again later."); // Add user feedback here
+      console.error("Error registering company:", error);
+      alert("Error registering company, please try again later."); // Add user feedback here
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 my-20 border border-1 shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
+    <div className="max-w-md mx-auto bg-white p-8 my-20 border border-gray-300 rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">
+        Register Company
+      </h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -78,15 +87,15 @@ const RegisterFormGuest: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
-              Name
+              Company Name
             </label>
             <Field
               id="name"
               name="name"
               type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border-gray-300 rounded-md shadow-sm py-2 px-3 "
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="name"
@@ -98,7 +107,7 @@ const RegisterFormGuest: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Email
             </label>
@@ -106,7 +115,7 @@ const RegisterFormGuest: React.FC = () => {
               id="email"
               name="email"
               type="email"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="email"
@@ -117,19 +126,39 @@ const RegisterFormGuest: React.FC = () => {
 
           <div className="mb-4">
             <label
-              htmlFor="website"
-              className="block text-sm font-medium text-black"
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
             >
-              Website URL
+              Password
             </label>
             <Field
-              id="website"
-              name="website"
-              type="url"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              id="password"
+              name="password"
+              type="password"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
-              name="website"
+              name="password"
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone Number
+            </label>
+            <Field
+              id="phoneNumber"
+              name="phoneNumber"
+              type="text"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <ErrorMessage
+              name="phoneNumber"
               component="div"
               className="text-red-500 text-sm"
             />
@@ -138,7 +167,7 @@ const RegisterFormGuest: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="address"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Address
             </label>
@@ -146,7 +175,7 @@ const RegisterFormGuest: React.FC = () => {
               id="address"
               name="address"
               type="text"
-              className="mt-1 block w-full text-black border bg-gray-200 border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="address"
@@ -158,7 +187,7 @@ const RegisterFormGuest: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="city"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               City
             </label>
@@ -166,7 +195,7 @@ const RegisterFormGuest: React.FC = () => {
               id="city"
               name="city"
               type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="city"
@@ -177,39 +206,19 @@ const RegisterFormGuest: React.FC = () => {
 
           <div className="mb-4">
             <label
-              htmlFor="password"
-              className="block text-sm font-medium text-black"
+              htmlFor="websiteUrl"
+              className="block text-sm font-medium text-gray-700"
             >
-              Password
+              Website URL
             </label>
             <Field
-              id="password"
-              name="password"
-              type="password"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              id="websiteUrl"
+              name="websiteUrl"
+              type="url"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
-              name="password"
-              component="div"
-              className="text-red-500 text-sm"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="contactNumber"
-              className="block text-sm font-medium text-black"
-            >
-              Contact Number
-            </label>
-            <Field
-              id="contactNumber"
-              name="contactNumber"
-              type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
-            />
-            <ErrorMessage
-              name="contactNumber"
+              name="websiteUrl"
               component="div"
               className="text-red-500 text-sm"
             />
@@ -218,15 +227,15 @@ const RegisterFormGuest: React.FC = () => {
           <div className="mb-4">
             <label
               htmlFor="referralCode"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
-              Referral Code (Optional)
+              Referral Code
             </label>
             <Field
               id="referralCode"
               name="referralCode"
               type="text"
-              className="mt-1 block w-full text-black bg-gray-200 border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ErrorMessage
               name="referralCode"
@@ -235,12 +244,12 @@ const RegisterFormGuest: React.FC = () => {
             />
           </div>
 
-          <div className="pt-12">
+          <div className="mt-6">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md"
+              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
             >
-              Register
+              Register Company
             </button>
           </div>
         </Form>
@@ -249,4 +258,4 @@ const RegisterFormGuest: React.FC = () => {
   );
 };
 
-export default RegisterFormGuest;
+export default CompanyRegisterForm;

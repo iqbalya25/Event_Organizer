@@ -51,34 +51,37 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
       eventTypeId: Yup.string().required("Required"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      // Format the dates to "yyyy/MM/dd"
-      const formattedValues = {
-        ...values,
-        dateStart: format(new Date(values.dateStart), "yyyy/MM/dd"),
-        dateEnd: format(new Date(values.dateEnd), "yyyy/MM/dd"),
-      };
+      try {
+        const formattedValues = {
+          ...values,
+          dateStart: format(new Date(values.dateStart), "yyyy/MM/dd"),
+          dateEnd: format(new Date(values.dateEnd), "yyyy/MM/dd"),
+        };
 
-      console.log("Form Values:", formattedValues); // Print the form values to the console
+        console.log("Form Values:", formattedValues); // Print the form values to the console
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formattedValues),
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formattedValues),
+          }
+        );
+
+        if (response.ok) {
+          const event = await response.json();
+          onAddEvent(event);
+          resetForm();
+        } else {
+          console.error("Failed to submit event");
+          const error = await response.json();
+          console.error("Error:", error.message);
         }
-      );
-
-      if (response.ok) {
-        const event = await response.json();
-        onAddEvent(event);
-        resetForm();
-      } else {
-        console.error("Failed to submit event");
-        const error = await response.json();
-        console.error("Error:", error.message);
+      } catch (error) {
+        console.error("An error occurred while submitting the form:", error);
       }
     },
   });
