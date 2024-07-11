@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React from "react";
 
-const RegistrationSection = () => {
+const RegistrationHeader = () => {
   return (
     <div>
       <h1 className="text-xl lg:text-6xl pt-32 pb-16 bg-black text-white font-bold flex justify-center">
         Online Registration
       </h1>
-      <div className="flex flex-row justify-center gap-20 mt-10 text-white font-bold">
+      <div className="flex flex-col justify-center items-center gap-5 md:flex-row justify-center md:gap-20 mt-10 text-white font-bold">
         <Link
           href="/registration/guest"
           className="bg-black p-5 w-40 text-center flex justify-center items-center h-16"
@@ -16,7 +16,7 @@ const RegistrationSection = () => {
         </Link>
         <Link
           href="/registration/company"
-          className="bg-red-600 p-5 w-40 text-center flex justify-center items-center h-16"
+          className="bg-black p-5 w-40 text-center flex justify-center items-center h-16"
         >
           Company
         </Link>
@@ -31,4 +31,4 @@ const RegistrationSection = () => {
   );
 };
 
-export default RegistrationSection;
+export default RegistrationHeader;

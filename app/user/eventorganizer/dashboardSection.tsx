@@ -33,7 +33,7 @@ const DashboardOrganizerSection: React.FC = () => {
           <h2 className="text-2xl text-black font-bold mb-4">
             Booth and Conference Settings
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <ServiceCard
               link="#"
               title="Manage Booths"
@@ -44,6 +44,12 @@ const DashboardOrganizerSection: React.FC = () => {
               link="#"
               title="Manage Conferences"
               description="Set up and configure conferences"
+              icon="fi fi-ts-arrow-right"
+            />
+            <ServiceCard
+              link="/user/eventorganizer/addevent"
+              title="Add Event"
+              description="Add Monthly Event"
               icon="fi fi-ts-arrow-right"
             />
           </div>
