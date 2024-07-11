@@ -45,7 +45,7 @@ const RegistrationFormEO: React.FC = () => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
+        `${process.env.NEXT_PUBLIC_API_URL}api/v1/organizer/register`,
         {
           method: "POST",
           headers: {

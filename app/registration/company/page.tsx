@@ -1,10 +1,10 @@
+import RegistrationHeader from "@/app/components/HeaderRegistUser";
 import RegisterFormGuest from "./registrationFormCompany";
-import RegistrationSection from "./registrationSection";
 
 const RegistrationCompany: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
-      <RegistrationSection />
+      <RegistrationHeader />
       <RegisterFormGuest />
     </div>
   );

@@ -40,7 +40,6 @@ const CompanyRegisterForm: React.FC = () => {
     websiteUrl: Yup.string()
       .url("Invalid URL")
       .required("Website URL is required"),
-    referralCode: Yup.string().required("Referral code is required"),
   });
 
   const handleSubmit = async (values: CompanyRegisterFormValues) => {
@@ -48,7 +47,7 @@ const CompanyRegisterForm: React.FC = () => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/create-event`,
+        `${process.env.NEXT_PUBLIC_API_URL}api/v1/company/register`,
         {
           method: "POST",
           headers: {
