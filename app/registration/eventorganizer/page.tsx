@@ -1,6 +1,5 @@
 import RegistrationHeader from "@/app/components/HeaderRegistUser";
 import RegistrationFormEO from "./registrationFormEO";
-import RegistrationSection from "./registrationSection";
 
 const RegistrationEO: React.FC = () => {
   return (
