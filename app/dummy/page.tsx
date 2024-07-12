@@ -1,6 +1,4 @@
 import { Suspense } from "react";
-import { EventProvider } from "../context/eventContext";
-import AuthTest from "./AuthTest";
 import MenuComponent from "./menuComponent";
 import Test from "./test";
 import { cookies } from "next/headers";
