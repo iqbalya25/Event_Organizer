@@ -13,7 +13,6 @@ const DummyPage = () => {
     <div>
       <MenuComponent />
       <Test />
-      <EventListTest />
       <Suspense fallback={<div>Loading auth...</div>}>
         {/* <AuthTest /> */}
       </Suspense>
