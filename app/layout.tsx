@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Ubuntu } from "next/font/google";
 import React from "react";
 import EventContext, { EventProvider } from "./context/eventContext";
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <EventProvider>
-          <TopicsProvider>{children}</TopicsProvider>
-        </EventProvider>
+        <SessionProvider>
+          <EventProvider>
+            <TopicsProvider>{children}</TopicsProvider>
+          </EventProvider>
+        </SessionProvider>
       </body>
     </html>
   );
