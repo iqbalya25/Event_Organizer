@@ -13,7 +13,7 @@ const Test = () => {
       {session && session.user ? (
         <div>
           <p>Email: {session.user.email}</p>
-          <p>Email: {session.user.role}</p>
+          {/* <p>Email: {session.user.role}</p> */}
           <p>Email: {session.user.token}</p>
         </div>
       ) : (
