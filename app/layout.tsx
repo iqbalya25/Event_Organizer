@@ -1,3 +1,4 @@
+"use client";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Ubuntu } from "next/font/google";
@@ -5,6 +6,8 @@ import React from "react";
 import EventContext, { EventProvider } from "./context/eventContext";
 import { TopicsProvider } from "./context/topicsContext";
 import "./globals.css";
+import { QueryClientProvider } from "@tanstack/react-query";
+import queryClient from "@/queries/queriesClient";
 
 const inter = Ubuntu({
   subsets: ["latin"],
@@ -23,13 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <SessionProvider>
-          <EventProvider>
-            <TopicsProvider>{children}</TopicsProvider>
-          </EventProvider>
-        </SessionProvider>
-      </body>
+
+      <QueryClientProvider client={queryClient}>
+        <body className={inter.className}>{children}</body>
+      </QueryClientProvider>
     </html>
   );
 }
