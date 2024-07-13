@@ -1,4 +1,3 @@
-// src/queries/events.ts
 import { useQuery } from "@tanstack/react-query";
 import { MonthEvents } from "@/types/eventTypes";
 
@@ -10,8 +9,8 @@ const fetchEvents = async (): Promise<MonthEvents[]> => {
     throw new Error("Network response was not ok");
   }
   const data = await response.json();
-  console.log("Fetched events data:", data); // Log the data to check its format
-  return data.data.content; // Extract the events from the response
+  console.log("Fetched events data:", data);
+  return data.data.content; 
 };
 
 export const useEvents = () => {

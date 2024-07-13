@@ -1,24 +1,23 @@
 // types/Company.ts
-export interface ProductType {
-  id: string;
+
+export interface Product {
   name: string;
   description: string;
-  photoUrl: string;
+  companyId: number | null;
+  imageUrl: string | null;
+  slug: string;
 }
 
 export interface Company {
-  slug: string;
-  status: string;
-  title: string;
-  location: {
-    description: string;
-    icon: string;
-    link: string;
-    title: string;
-  };
+  id: number | null;
   name: string;
+  email: string;
+  phoneNumber: string;
   address: string;
-  country: string;
-  description: string;
-  products: ProductType[];
+  city: string;
+  websiteUrl: string;
+  profileUrl: string;
+  about: string | null;
+  slug: string;
+  products: Product[];
 }
