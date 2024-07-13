@@ -1,18 +1,18 @@
 import React from "react";
+import Link from "next/link";
 
-interface redButtonProps {
+interface RedButtonProps {
   title: string;
-  onClick: () => void;
+  href: string;
 }
 
-const RedButton: React.FC<redButtonProps> = ({ title, onClick }) => {
+const RedButton: React.FC<RedButtonProps> = ({ title, href }) => {
   return (
-    <button
-      onClick={onClick}
-      className="btn border-none bg-red-600 hover:bg-white text-white hover:text-black w-24 md:w-36 rounded-full"
-    >
-      <p className="p-3 tex-2xl font-bold">{title}</p>
-    </button>
+    <Link href={href}>
+      <button className="btn border-none bg-red-600 hover:bg-white text-white hover:text-black w-24 md:w-36 rounded-full">
+        <p className="p-3 tex-2xl font-bold">{title}</p>
+      </button>
+    </Link>
   );
 };
 
