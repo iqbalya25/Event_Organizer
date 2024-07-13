@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { useCompanies } from "../companies";
 import CompanyDetail from "./companydetail";
 
+
 const CompanyDetailPage: React.FC = () => {
   const params = useParams();
   const companySlug = params.companySlug as string;
