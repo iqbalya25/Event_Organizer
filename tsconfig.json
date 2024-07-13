@@ -18,8 +18,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "auth": ["./auth.ts"]
+      "@/*": ["./*"]
     }
   },
   "include": [
@@ -29,8 +28,7 @@
     ".next/types/**/*.ts",
     "app/expo/eventlist/components/MonthEvents",
     "app/expo/eventlist/components/EventItem",
-    "app/partner/partnerList",
-    "auth.ts"
+    "app/partner/partnerList"
   ],
   "exclude": ["node_modules"]
 }
