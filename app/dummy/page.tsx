@@ -5,7 +5,7 @@ const DummyPage = () => {
   return (
     <div>
       <MenuComponent />
-      <UserProfileForm />
+      {/* <UserProfileForm /> */}
     </div>
   );
 };
