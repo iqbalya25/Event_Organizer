@@ -1,6 +1,6 @@
 import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
-import CompanyCard from "../components/Card/companyCard";
+import CompanyCard from "./components/companyCard";
 import { PartnersList } from "@/constants/partnerList";
 
 const PartnerListSection = () => {
@@ -13,7 +13,7 @@ const PartnerListSection = () => {
         <GeneralSearch />
       </div>
       <div className="mx-36">
-        <CompanyCard partnersItem={PartnersList} />
+        <CompanyCard />
       </div>
     </div>
   );

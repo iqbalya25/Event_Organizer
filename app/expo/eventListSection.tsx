@@ -1,8 +1,7 @@
+// src/pages/eventListSection.tsx
 import React from "react";
-
 import GeneralSearch from "../components/Searchbar/generalSearch";
-import EventCard from "../components/Card/eventCard";
-import { EventsList } from "@/constants/eventList";
+import EventCard from "./components/eventCard";
 
 const EventListSection: React.FC = () => {
   return (
@@ -15,7 +14,7 @@ const EventListSection: React.FC = () => {
       <div className="mx-auto px-16 pt-20 ">
         <GeneralSearch />
       </div>
-      <EventCard eventsItem={EventsList} />
+      <EventCard />
     </div>
   );
 };
