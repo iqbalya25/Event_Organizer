@@ -6,22 +6,25 @@ import React from "react";
 
 import { useParams } from "next/navigation";
 import { useCompanies } from "../companies";
-import CompanyDetail from "./companydetail";
-
+import CompanyDetail from "./CompanyDetail";
 
 const CompanyDetailPage: React.FC = () => {
   const params = useParams();
   const companySlug = params.companySlug as string;
-  
+
   const { data, error, isLoading } = useCompanies();
 
   if (isLoading) return <div className="text-center py-10">Loading...</div>;
-  if (error instanceof Error) 
-    return <div className="text-center py-10 text-red-500">Error: {error.message}</div>;
-  if (!data || data.length === 0) 
+  if (error instanceof Error)
+    return (
+      <div className="text-center py-10 text-red-500">
+        Error: {error.message}
+      </div>
+    );
+  if (!data || data.length === 0)
     return <div className="text-center py-10">No companies found</div>;
 
-  const company = data.find(c => c.slug === companySlug);
+  const company = data.find((c) => c.slug === companySlug);
 
   if (!company)
     return <div className="text-center py-10">Company not found</div>;
