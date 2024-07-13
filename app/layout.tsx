@@ -14,7 +14,7 @@ const inter = Ubuntu({
   weight: ["300", "400", "500", "700"],
 });
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "KUKIVENT",
   description: "Your Trusted Event Management",
 };
