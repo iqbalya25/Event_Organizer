@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
-import HallCLayout from "./layout/hallC";
+
 import PaymentSection from "@/app/payment/paymentSection";
+import HallCLayout from "./layout/HallC";
+
 
 const ExhibitionHallC = () => {
   return (

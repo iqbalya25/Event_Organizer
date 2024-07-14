@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
+import StaticNavbar from "../components/StaticNavbar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,7 +10,7 @@ interface LayoutProps {
 const Userlayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Navbar />
+      <StaticNavbar />
       <main>{children}</main>
       <Footer />
     </>

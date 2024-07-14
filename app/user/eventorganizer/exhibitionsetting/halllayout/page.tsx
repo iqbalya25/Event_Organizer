@@ -1,6 +1,5 @@
 import React from "react";
-import HallASetting from "./hallAsetting";
-import SettingSection from "./settingSection";
+import SettingSection from "./SettingSection";
 
 const GuestDashboard = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardSection from "./dashboardSection";
+import DashboardSection from "../company/DashboardSection";
 
 const GuestDashboard = () => {
   return (

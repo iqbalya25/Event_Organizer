@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import ExhibitionHallA from "./exhibitionHallA";
-import ExhibitionHallB from "./exhibitionHallB";
-import ExhibitionHallC from "./exhibitionHallC";
+import ExhibitionHallA from "./ExhibitionHallA";
+import ExhibitionHallB from "./ExhibitionHallB";
+import ExhibitionHallC from "./ExhibitionHallC";
 
 type MenuType = "menu1" | "menu2" | "menu3" | null;
 
