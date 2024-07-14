@@ -31,7 +31,7 @@ const CompanyDetailPage: React.FC = () => {
 
   return (
     <div>
-      <div className="pt-36 px-16 pb-10 flex flex-col items-center justify-center bg-black">
+      <div className="py-10 px-16 flex flex-col items-center justify-center bg-black">
         <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white">
           Company Profiles
         </h1>

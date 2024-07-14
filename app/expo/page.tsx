@@ -1,4 +1,3 @@
-// src/pages/eventlist.tsx
 import React from "react";
 import EventListSection from "./EventListSection";
 

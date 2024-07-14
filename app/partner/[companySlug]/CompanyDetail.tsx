@@ -11,7 +11,7 @@ interface CompanyDetailProps {
 
 const CompanyDetail: React.FC<CompanyDetailProps> = ({ company }) => {
   return (
-    <div className="company-detail bg-white">
+    <div className="company-detail bg-white text-black">
       <div className="max-w-7xl mx-auto py-10 px-4">
         <div className="flex flex-col items-center lg:flex-row lg:justify-between mb-8">
           <div className="text-center lg:text-left">
