@@ -3,7 +3,6 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-
 import { MonthEvents } from "@/types/eventTypes";
 import EventDetail from "./EventDetail";
 import EventInfo from "./EventInfo";

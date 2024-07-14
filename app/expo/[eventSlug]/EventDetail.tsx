@@ -1,4 +1,4 @@
-// src/expo/eventDetailSlug/EventDetail.tsx
+
 import React from "react";
 import { MonthEvents } from "@/types/eventTypes";
 
