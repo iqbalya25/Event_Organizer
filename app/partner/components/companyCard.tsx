@@ -2,7 +2,7 @@
 import { Partner } from "@/types/partner";
 import React from "react";
 import Link from "next/link";
-import { useCompanies } from "../companies";
+import { useCompanies } from "../../api/fetch/fetchCompanies";
 
 const CompanyCard: React.FC = () => {
   const { data, error, isLoading } = useCompanies();

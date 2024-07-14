@@ -5,7 +5,7 @@
 import React from "react";
 
 import { useParams } from "next/navigation";
-import { useCompanies } from "../companies";
+import { useCompanies } from "../../api/fetch/fetchCompanies";
 import CompanyDetail from "./CompanyDetail";
 
 const CompanyDetailPage: React.FC = () => {

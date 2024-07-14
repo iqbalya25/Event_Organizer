@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Company } from "@/types/companyProduct";
 
-const fetchEvents = async (): Promise<Company[]> => {
+const fetchCompanies = async (): Promise<Company[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}api/v1/company`
   );
@@ -16,6 +16,6 @@ const fetchEvents = async (): Promise<Company[]> => {
 export const useCompanies = () => {
   return useQuery<Company[], Error>({
     queryKey: ["companies"],
-    queryFn: fetchEvents,
+    queryFn: fetchCompanies,
   });
 };

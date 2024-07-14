@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { MonthEvents } from "@/types/eventTypes";
 import { groupEventsByMonth } from "@/utils/groupEventsByMonth";
-import { useEvents } from "../events";
+import { useEvents } from "../../api/fetch/fetchEvents";
 
 const EventCard: React.FC = () => {
   const { data, error, isLoading } = useEvents();
