@@ -2,6 +2,7 @@ import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
 import CompanyCard from "./components/companyCard";
 import { PartnersList } from "@/constants/partnerList";
+import SearchBarCompany from "./components/SearchBarCompany";
 
 const PartnerListSection = () => {
   return (
@@ -11,9 +12,7 @@ const PartnerListSection = () => {
           Partner List
         </h1>
       </div>
-      <div className="px-36 pt-20">
-        <GeneralSearch />
-      </div>
+      <div className="px-36 pt-20"></div>
       <div className="mx-36">
         <CompanyCard />
       </div>
