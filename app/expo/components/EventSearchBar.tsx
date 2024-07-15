@@ -60,6 +60,7 @@ const EventSearchBar: React.FC<EventSearchBarProps> = ({
   };
 
   const handleSearch = () => {
+
     if (searchTerm.trim() === "") {
       // If the search term is empty, show all events
       onSearch(events || []);
