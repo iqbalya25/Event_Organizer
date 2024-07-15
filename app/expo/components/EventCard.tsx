@@ -8,7 +8,8 @@ import EventSearchBar from "./EventSearchBar";
 import SortDropdown from "./DropdownSection";
 
 const EventCard: React.FC = () => {
-  const { data, error, isLoading } = useEvents();
+  const [query, setQuery] = useState("");
+  const { data, error, isLoading } = useEvents(query);
   const [filteredEvents, setFilteredEvents] = useState<MonthEvents[]>([]);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const EventCard: React.FC = () => {
 
   return (
     <div className="flex flex-col max-w-7xl mx-auto px-4 gap-10 py-10">
-      <EventSearchBar onSearch={handleSearch} events={data || []} />
+      <EventSearchBar />
       <SortDropdown onSortChange={handleSortChange} />
       {Object.entries(groupedEvents).map(([month, events], monthIndex) => (
         <div key={monthIndex}>
