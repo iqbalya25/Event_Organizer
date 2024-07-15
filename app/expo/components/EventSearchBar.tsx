@@ -60,6 +60,13 @@ const EventSearchBar: React.FC<EventSearchBarProps> = ({
   };
 
   const handleSearch = () => {
+
+    if (searchTerm.trim() === "") {
+      // If the search term is empty, show all events
+      onSearch(events || []);
+      return;
+    }
+
     const normalizedSearchTerm = searchTerm
       .toLowerCase()
       .replace(/[^a-z0-9]/g, "");
