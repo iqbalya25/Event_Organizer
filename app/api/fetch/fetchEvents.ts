@@ -10,7 +10,7 @@ const fetchEvents = async (): Promise<MonthEvents[]> => {
   }
   const data = await response.json();
   console.log("Fetched events data:", data);
-  return data.data.content; 
+  return data.data.content;
 };
 
 export const useEvents = () => {

@@ -1,6 +1,7 @@
 // src/types/eventTypes.ts
 export interface MonthEvents {
   id: number;
+  slug: string;
   name: string;
   address: string;
   city: string;

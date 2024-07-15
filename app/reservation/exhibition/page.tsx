@@ -1,5 +1,5 @@
 import React from "react";
-import ExhibitionSection from "./exhibitionSection";
+import ExhibitionSection from "./ExhibitionSection";
 
 const ReservationEX = () => {
   return (

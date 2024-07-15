@@ -1,4 +1,3 @@
-// src/utils/groupEventsByMonth.ts
 import { MonthEvents } from "@/types/eventTypes";
 
 interface GroupedEvents {

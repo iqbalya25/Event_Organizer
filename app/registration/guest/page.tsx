@@ -1,5 +1,5 @@
 import RegistrationHeader from "@/app/components/HeaderRegistUser";
-import RegisterFormGuest from "./registrationFormGuest";
+import RegisterFormGuest from "./RegistrationFormGuest";
 
 const RegistrationGuest: React.FC = () => {
   return (

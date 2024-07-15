@@ -1,6 +1,5 @@
-// src/pages/eventlist.tsx
 import React from "react";
-import EventListSection from "./eventListSection";
+import EventListSection from "./EventListSection";
 
 const Eventlist: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import HallASetting from "./hallAsetting";
-import HallBSetting from "./hallBsetting";
-import HallCSetting from "./hallCsetting";
+import HallASetting from "./HallAsetting";
+import HallBSetting from "./HallBsetting";
+import HallCSetting from "./HallCsetting";
 
 type MenuType = "menu1" | "menu2" | "menu3" | null;
 

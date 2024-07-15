@@ -1,5 +1,5 @@
 "use client";
-import EventForm from "@/app/components/EventForm";
+import EventForm from "@/app/user/eventorganizer/components/EventForm";
 import React, { useState } from "react";
 
 const EventFormSection = () => {
@@ -42,7 +42,7 @@ const EventFormSection = () => {
           Add Event Monthly
         </h1>
       </div>
-      <div className="container mx-auto my-20 p-6 bg-white rounded-lg shadow-lg">
+      <div className=" bg-gray-300 ">
         <EventForm onAddEvent={addEvent} />
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
