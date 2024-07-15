@@ -74,27 +74,28 @@ const SearchBarCompany: React.FC<SearchBarCompanyProps> = ({
   };
 
   return (
-    <div className="relative mb-4">
-      <div className="flex">
+    <div className="relative flex flex-col items-center w-full mb-4">
+      <div className="relative w-full flex items-center">
         <input
           type="text"
           placeholder="Search companies..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
-          className="flex-grow px-5 py-2 border bg-gray-200 border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+          className="w-full pl-3 pr-12 h-20 text-2xl bg-white shadow-lg drop-shadow-md"
         />
         <button
           onClick={handleSearch}
-          className="px-4 py-2 bg-red-500 text-white rounded-r-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-black"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2"
         >
-          Search
+          <img src="/magnifier.png" alt="Search" />
         </button>
       </div>
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg"
+          className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-lg"
+          style={{ top: "100%" }}
         >
           {suggestions.map((company, index) => (
             <div

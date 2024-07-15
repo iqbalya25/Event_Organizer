@@ -9,24 +9,21 @@ import SortDropdown from "./DropdownSection";
 
 const EventCard: React.FC = () => {
   const [query, setQuery] = useState("");
-  const { data, error, isLoading } = useEvents(query);
+  const { data: events, error, isLoading } = useEvents(query);
   const [filteredEvents, setFilteredEvents] = useState<MonthEvents[]>([]);
 
   useEffect(() => {
-    if (data) {
-      setFilteredEvents(data); // Initialize with full list of events
+    if (events) {
+      setFilteredEvents(events); // Initialize with full list of events
     }
-  }, [data]);
+  }, [events]);
 
-  const handleSearch = (searchTerm: string) => {
-    const filtered = data?.filter((event) =>
-      event.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredEvents(filtered || []);
+  const handleSearch = (matchingEvents: MonthEvents[]) => {
+    setFilteredEvents(matchingEvents);
   };
 
   const handleSortChange = (field: string, direction: "asc" | "desc") => {
-    const sortedEvents = [...(filteredEvents || [])].sort((a, b) => {
+    const sortedEvents = [...filteredEvents].sort((a, b) => {
       if (field === "name") {
         return direction === "asc"
           ? a.name.localeCompare(b.name)
@@ -50,7 +47,7 @@ const EventCard: React.FC = () => {
 
   return (
     <div className="flex flex-col max-w-7xl mx-auto px-4 gap-10 py-10">
-      <EventSearchBar />
+      <EventSearchBar events={events} onSearch={handleSearch} />
       <SortDropdown onSortChange={handleSortChange} />
       {Object.entries(groupedEvents).map(([month, events], monthIndex) => (
         <div key={monthIndex}>
