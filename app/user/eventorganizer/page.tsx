@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardOrganizerSection from "./DashboardSection";
 
-const GuestDashboard = () => {
+const EODashboard = () => {
   return (
     <div>
       <DashboardOrganizerSection />
@@ -9,4 +9,4 @@ const GuestDashboard = () => {
   );
 };
 
-export default GuestDashboard;
+export default EODashboard;
