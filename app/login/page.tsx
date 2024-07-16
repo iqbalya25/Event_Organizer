@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
         redirect: true,
         email: values.email,
         password: values.password,
-        callbackUrl: "/",
+        callbackUrl: "/dummy",
       });
 
       if (result?.error) {
