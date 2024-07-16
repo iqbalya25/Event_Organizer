@@ -26,14 +26,6 @@ const LoginPage: React.FC = () => {
         password: values.password,
         callbackUrl: "/dummy",
       });
-
-      if (result?.error) {
-        console.error("Login error:", result.error);
-        alert("Error logging in user: " + result.error);
-      } else {
-        console.log("User logged in successfully");
-        //router.push("/");
-      }
     } catch (error) {
       console.error("Unexpected error during login:", error);
       alert("An unexpected error occurred. Please try again later.");
@@ -78,12 +70,14 @@ const LoginPage: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}>
+          onSubmit={handleSubmit}
+        >
           <Form className="space-y-6">
             <div>
               <label
                 htmlFor="email"
-                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+              >
                 Your email
               </label>
               <Field
@@ -102,7 +96,8 @@ const LoginPage: React.FC = () => {
             <div>
               <label
                 htmlFor="password"
-                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+              >
                 Your password
               </label>
               <Field
@@ -131,27 +126,31 @@ const LoginPage: React.FC = () => {
                 <div className="text-sm ml-3">
                   <label
                     htmlFor="remember"
-                    className="font-medium text-gray-900 dark:text-gray-300">
+                    className="font-medium text-gray-900 dark:text-gray-300"
+                  >
                     Remember me
                   </label>
                 </div>
               </div>
               <Link
                 href="#"
-                className="text-sm text-blue-700 hover:underline dark:text-blue-500">
+                className="text-sm text-blue-700 hover:underline dark:text-blue-500"
+              >
                 Lost Password?
               </Link>
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
               Login to your account
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center">
               Not registered?{" "}
               <Link
                 href="/registration/guest"
-                className="text-blue-700 hover:underline dark:text-blue-500">
+                className="text-blue-700 hover:underline dark:text-blue-500"
+              >
                 Create account
               </Link>
             </div>
