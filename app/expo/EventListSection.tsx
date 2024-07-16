@@ -4,6 +4,7 @@ import GeneralSearch from "../components/Searchbar/generalSearch";
 import EventCard from "./components/EventCard";
 import EventSearchBar from "./components/EventSearchBar";
 
+
 const EventListSection: React.FC = () => {
   return (
     <div>
@@ -12,6 +13,7 @@ const EventListSection: React.FC = () => {
           Our Event & Exhibitions
         </h1>
       </div>
+
       <EventCard />
     </div>
   );

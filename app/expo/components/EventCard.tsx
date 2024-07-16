@@ -1,9 +1,30 @@
+
+// src/expo/components/eventCard.tsx
+"use client";
+import React from "react";
+
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MonthEvents } from "@/types/eventTypes";
 import { groupEventsByMonth } from "@/utils/groupEventsByMonth";
 import { useEvents } from "../../api/fetch/fetchEvents";
+
+const EventCard: React.FC = () => {
+  const { data, error, isLoading } = useEvents();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error instanceof Error) return <div>Error: {error.message}</div>;
+
+  console.log("Data in EventCard:", data);
+
+  if (!data || data.length === 0) return <div>No events found</div>;
+
+  const groupedEvents = groupEventsByMonth(data);
+
+  return (
+    <div className="flex flex-col mx-16 my-24 gap-10">
+=======
 import EventSearchBar from "./EventSearchBar";
 import SortDropdown from "./DropdownSection";
 
@@ -52,6 +73,7 @@ const EventCard: React.FC = () => {
     <div className="flex flex-col max-w-7xl mx-auto px-4 gap-10 py-10">
       <EventSearchBar events={events} onSearch={handleSearch} />
       <SortDropdown onSortChange={handleSortChange} />
+
       {Object.entries(groupedEvents).map(([month, events], monthIndex) => (
         <div key={monthIndex}>
           <div className="bg-red-600 p-5">
@@ -63,7 +85,10 @@ const EventCard: React.FC = () => {
             <div className="flex gap-10 px-5">
               {events.map((eventItem) => (
                 <div
+
+                  key={eventItem.slug}
                   key={eventItem.id}
+
                   className="mb-4 flex-shrink-0 border-r-2 border-gray-300"
                 >
                   <Link href={`/expo/${eventItem.slug}`}>
