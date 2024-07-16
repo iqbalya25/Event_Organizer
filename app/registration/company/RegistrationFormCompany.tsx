@@ -88,7 +88,7 @@ const CompanyRegisterForm: React.FC = () => {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Company Name
+              Company Names
             </label>
             <Field
               id="name"
