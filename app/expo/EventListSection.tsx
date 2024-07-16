@@ -1,9 +1,9 @@
 // src/pages/eventListSection.tsx
 import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
-import EventCard from "./components/EventCard";
-import EventSearchBar from "./components/EventSearchBar";
 
+import EventSearchBar from "./components/EventSearchBar";
+import EventCard from "./components/EventCard";
 
 const EventListSection: React.FC = () => {
   return (
