@@ -1,42 +1,24 @@
+// components/SortDropdown.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 interface SortDropdownProps {
-  onSortChange: (sortField: string, sortDirection: "asc" | "desc") => void;
+  onSortChange: (field: string, direction: "asc" | "desc") => void;
 }
 
 const SortDropdown: React.FC<SortDropdownProps> = ({ onSortChange }) => {
-  const [sortField, setSortField] = useState<
-    "dateStart" | "name" | "eventType"
-  >("dateStart");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-
-  useEffect(() => {
-    onSortChange(sortField, sortDirection);
-  }, [sortField, sortDirection, onSortChange]);
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const [field, direction] = e.target.value.split("-");
+    onSortChange(field, direction as "asc" | "desc");
+  };
 
   return (
-    <div className="flex flex-row items-center justify-center space-x-4">
-      <select
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        value={sortField}
-        onChange={(e) =>
-          setSortField(e.target.value as "dateStart" | "name" | "eventType")
-        }
-      >
-        <option value="dateStart">Date</option>
-        <option value="name">Alphabet</option>
-        <option value="eventType">Event Type</option>
-      </select>
-      <select
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        value={sortDirection}
-        onChange={(e) => setSortDirection(e.target.value as "asc" | "desc")}
-      >
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-    </div>
+    <select onChange={handleSortChange} className="p-2 border rounded">
+      <option value="name-asc">Name (A-Z)</option>
+      <option value="name-desc">Name (Z-A)</option>
+      <option value="dateStart-asc">Start Date (Earliest First)</option>
+      <option value="dateStart-desc">Start Date (Latest First)</option>
+    </select>
   );
 };
 
