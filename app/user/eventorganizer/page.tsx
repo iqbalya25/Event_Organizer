@@ -1,12 +1,13 @@
 import React from "react";
-import DashboardSection from "../company/DashboardSection";
+import DashboardOrganizerSection from "./DashboardSection";
 
-const GuestDashboard = () => {
+
+const EODashboard = () => {
   return (
     <div>
-      <DashboardSection />
+      <DashboardOrganizerSection />
     </div>
   );
 };
 
-export default GuestDashboard;
+export default EODashboard;

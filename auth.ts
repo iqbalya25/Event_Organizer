@@ -30,25 +30,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        username: { label: "Email", type: "text", placeholder: "username" },
+        email: { label: "Email", type: "text", placeholder: "username" },
         password: { label: "Password", type: "password" },
       },
 
       async authorize(credentials) {
-        if (!credentials || !credentials.username || !credentials.password) {
+        if (!credentials || !credentials.email || !credentials.password) {
           throw new Error("Invalid input.");
         }
-        const res = await fetch("http://localhost:8080/api/v1/auth", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: credentials?.username,
-            password: credentials?.password,
-          }),
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}api/v1/auth`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+            credentials: "include",
+          }
+        );
 
         if (!res.ok) return null;
 

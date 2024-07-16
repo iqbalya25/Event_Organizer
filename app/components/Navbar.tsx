@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import RedButton from "./Button/redButton";
+import SignOutButton from "./Button/signOutButton";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: session } = useSession();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -32,8 +35,7 @@ const Navbar = () => {
     <div
       className={`navbar h-24 fixed top-0 left-0 w-full z-30 transition-all duration-100 text-white items-center justify-start md:justify-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
-      }`}
-    >
+      }`}>
       <div className="navbar-start">
         <div className="dropdown lg:hidden">
           {isDrawerOpen && (
@@ -43,15 +45,13 @@ const Navbar = () => {
                 <label
                   htmlFor="my-drawer"
                   className="btn btn-primary drawer-button"
-                  style={{ background: "transparent", border: "none" }}
-                >
+                  style={{ background: "transparent", border: "none" }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-8"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="white"
-                  >
+                    stroke="white">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -65,8 +65,7 @@ const Navbar = () => {
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"
-                  className="drawer-overlay"
-                ></label>
+                  className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-xl">
                   <li>
                     <Link href="/expo">Expo</Link>
@@ -113,7 +112,11 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <RedButton title="Login" href="/login" />
+        {session && session.user ? (
+          <SignOutButton />
+        ) : (
+          <RedButton title="Login" href="/login" />
+        )}
       </div>
     </div>
   );

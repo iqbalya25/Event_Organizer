@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardSection from "./DashboardSection";
 
-const GuestDashboard = () => {
+const CompanyDashboard = () => {
   return (
     <div>
       <DashboardSection />
@@ -9,4 +9,4 @@ const GuestDashboard = () => {
   );
 };
 
-export default GuestDashboard;
+export default CompanyDashboard;
