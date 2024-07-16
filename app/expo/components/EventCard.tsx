@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MonthEvents } from "@/types/eventTypes";
 import { groupEventsByMonth } from "@/utils/groupEventsByMonth";
@@ -18,26 +18,29 @@ const EventCard: React.FC = () => {
     }
   }, [events]);
 
-  const handleSearch = (matchingEvents: MonthEvents[]) => {
+  const handleSearch = useCallback((matchingEvents: MonthEvents[]) => {
     setFilteredEvents(matchingEvents);
-  };
+  }, []);
 
-  const handleSortChange = (field: string, direction: "asc" | "desc") => {
-    const sortedEvents = [...filteredEvents].sort((a, b) => {
-      if (field === "name") {
-        return direction === "asc"
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
-      } else if (field === "dateStart") {
-        // Assuming you have date fields as strings
-        return direction === "asc"
-          ? Date.parse(a.dateStart) - Date.parse(b.dateStart)
-          : Date.parse(b.dateStart) - Date.parse(a.dateStart);
-      }
-      return 0;
-    });
-    setFilteredEvents(sortedEvents);
-  };
+  const handleSortChange = useCallback(
+    (field: string, direction: "asc" | "desc") => {
+      const sortedEvents = [...filteredEvents].sort((a, b) => {
+        if (field === "name") {
+          return direction === "asc"
+            ? a.name.localeCompare(b.name)
+            : b.name.localeCompare(a.name);
+        } else if (field === "dateStart") {
+          // Assuming you have date fields as strings
+          return direction === "asc"
+            ? Date.parse(a.dateStart) - Date.parse(b.dateStart)
+            : Date.parse(b.dateStart) - Date.parse(a.dateStart);
+        }
+        return 0;
+      });
+      setFilteredEvents(sortedEvents);
+    },
+    [filteredEvents]
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (error instanceof Error) return <div>Error: {error.message}</div>;
