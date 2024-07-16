@@ -5,6 +5,7 @@ import React from "react";
 import "./globals.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/queries/queriesClient";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Ubuntu({
   subsets: ["latin"],
@@ -23,9 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <QueryClientProvider client={queryClient}>
-        <body className={inter.className}>{children}</body>
-      </QueryClientProvider>
+      <SessionProvider>
+        <QueryClientProvider client={queryClient}>
+          <body className={inter.className}>{children}</body>
+        </QueryClientProvider>
+      </SessionProvider>
     </html>
   );
 }

@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { signIn } from "next-auth/react";
 
 const LoginPage: React.FC = () => {
   const initialValues = {
@@ -19,29 +20,52 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (values: typeof initialValues) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      const result = await signIn("credentials", {
+        redirect: true,
+        email: values.email,
+        password: values.password,
+        callbackUrl: "/",
+      });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      if (result?.error) {
+        console.error("Login error:", result.error);
+        alert("Error logging in user: " + result.error);
+      } else {
+        console.log("User logged in successfully");
+        //router.push("/");
       }
-
-      const data = await response.json();
-      console.log("User logged in successfully:", data);
-      alert("User logged in successfully!");
     } catch (error) {
-      console.error("Error logging in user:", error);
-      alert("Error logging in user, please try again later.");
+      console.error("Unexpected error during login:", error);
+      alert("An unexpected error occurred. Please try again later.");
     }
   };
+
+  // const handleSubmit = async (values: typeof initialValues) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}api/v1/auth`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(values),
+  //       }
+  //     );
+  //     console.log(response);
+
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+  //     }
+
+  //     const data = await response.json();
+  //     console.log("User logged in successfully:", data);
+  //     alert("User logged in successfully!");
+  //   } catch (error) {
+  //     console.error("Error logging in user:", error);
+  //     alert("Error logging in user, please try again later.");
+  //   }
+  // };
 
   return (
     <div>
@@ -54,14 +78,12 @@ const LoginPage: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           <Form className="space-y-6">
             <div>
               <label
                 htmlFor="email"
-                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-              >
+                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">
                 Your email
               </label>
               <Field
@@ -80,8 +102,7 @@ const LoginPage: React.FC = () => {
             <div>
               <label
                 htmlFor="password"
-                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-              >
+                className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">
                 Your password
               </label>
               <Field
@@ -110,31 +131,27 @@ const LoginPage: React.FC = () => {
                 <div className="text-sm ml-3">
                   <label
                     htmlFor="remember"
-                    className="font-medium text-gray-900 dark:text-gray-300"
-                  >
+                    className="font-medium text-gray-900 dark:text-gray-300">
                     Remember me
                   </label>
                 </div>
               </div>
               <Link
                 href="#"
-                className="text-sm text-blue-700 hover:underline dark:text-blue-500"
-              >
+                className="text-sm text-blue-700 hover:underline dark:text-blue-500">
                 Lost Password?
               </Link>
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
+              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Login to your account
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center">
               Not registered?{" "}
               <Link
                 href="/registration/guest"
-                className="text-blue-700 hover:underline dark:text-blue-500"
-              >
+                className="text-blue-700 hover:underline dark:text-blue-500">
                 Create account
               </Link>
             </div>

@@ -2,6 +2,8 @@
 import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
 import EventCard from "./components/EventCard";
+import EventSearchBar from "./components/EventSearchBar";
+
 
 const EventListSection: React.FC = () => {
   return (
@@ -14,6 +16,11 @@ const EventListSection: React.FC = () => {
       <div className="mx-auto px-16 pt-20 ">
         <GeneralSearch />
       </div>
+
+          Our Event & Exhibition
+        </h1>
+      </div>
+
       <EventCard />
     </div>
   );

@@ -6,7 +6,7 @@ import ServiceCard from "@/app/components/Card/serviceCard";
 const DashboardSection = () => {
   return (
     <div>
-      <header className="bg-black text-white pt-32 pb-8">
+      <header className="bg-black text-white pb-8">
         <h1 className="text-2xl lg:text-6xl font-bold text-center">
           Dashboard
         </h1>
@@ -44,7 +44,8 @@ const DashboardSection = () => {
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
-              link="/company/productform"
+
+              link="/user/company/productform"
               title="Add Product"
               description="Add your product for company information"
               icon="fi fi-ts-arrow-right"

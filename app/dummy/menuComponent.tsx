@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import SearchBar from "./SearchBar";
 
 type MenuType = "menu1" | "menu2" | null;
 
@@ -50,6 +51,8 @@ const MenuComponent = () => {
           </ul>
         </div>
       )}
+
+      <SearchBar />
     </div>
   );
 };
