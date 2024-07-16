@@ -2,6 +2,7 @@
 import React from "react";
 import GeneralSearch from "../components/Searchbar/generalSearch";
 import EventCard from "./components/EventCard";
+import EventSearchBar from "./components/EventSearchBar";
 
 const EventListSection: React.FC = () => {
   return (
