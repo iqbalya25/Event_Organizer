@@ -1,11 +1,16 @@
 import MenuComponent from "./menuComponent";
-import UserProfileForm from "./uploadFileForm";
 
+import dynamic from "next/dynamic";
+
+const UserProfileForm = dynamic(() => import("../dummy/userProfileForm"), {
+  ssr: false,
+});
 const DummyPage = () => {
   return (
     <div>
       <MenuComponent />
       {/* <UserProfileForm /> */}
+      <UserProfileForm />
     </div>
   );
 };
