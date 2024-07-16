@@ -1,10 +1,10 @@
 import React from "react";
-import DashboardSection from "../company/DashboardSection";
+import DashboardOrganizerSection from "./DashboardSection";
 
 const GuestDashboard = () => {
   return (
     <div>
-      <DashboardSection />
+      <DashboardOrganizerSection />
     </div>
   );
 };
