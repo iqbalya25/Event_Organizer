@@ -13,13 +13,6 @@ const EventListSection: React.FC = () => {
           Our Event & Exhibitions
         </h1>
       </div>
-      <div className="mx-auto px-16 pt-20 ">
-        <GeneralSearch />
-      </div>
-
-          Our Event & Exhibition
-        </h1>
-      </div>
 
       <EventCard />
     </div>
