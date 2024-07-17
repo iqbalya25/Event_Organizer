@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Payment } from "../../types/paymentModel";
+import { Payment } from "@/types/paymentModel";
 
 interface ReservationFormProps {
+  selectedBlock: string | null;
   onSubmit: (payment: Payment) => void;
 }
 
@@ -19,12 +20,21 @@ const blockPrices: { [key: string]: number } = {
   C3: 600,
 };
 
-const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
+const PaymentForm: React.FC<ReservationFormProps> = ({
+  selectedBlock,
+  onSubmit,
+}) => {
   const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    if (selectedBlock) {
+      setPrice(blockPrices[selectedBlock]);
+    }
+  }, [selectedBlock]);
 
   const initialValues = {
     companyName: "",
-    block: "",
+    block: selectedBlock || "",
     email: "",
     reservationDate: "",
     amount: price,
@@ -40,16 +50,6 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
       .required("Email is required"),
     reservationDate: Yup.date().required("Date is required"),
   });
-
-  const handleBlockChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    setFieldValue: any
-  ) => {
-    const selectedBlock = e.target.value;
-    setFieldValue("block", selectedBlock);
-    setPrice(blockPrices[selectedBlock]);
-    setFieldValue("amount", blockPrices[selectedBlock]);
-  };
 
   const handleSubmit = (
     values: typeof initialValues,
@@ -75,8 +75,9 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      enableReinitialize
     >
-      {({ setFieldValue }) => (
+      {({ values }) => (
         <Form className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold mb-4">Reservation Form</h2>
           <div className="mb-4">
@@ -103,26 +104,16 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
               htmlFor="block"
               className="block text-sm font-medium text-gray-700"
             >
-              Select Block
+              Selected Block
             </label>
             <Field
-              as="select"
+              type="text"
               id="block"
               name="block"
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                handleBlockChange(e, setFieldValue)
-              }
-            >
-              <option value="" disabled>
-                Select a block
-              </option>
-              {Object.keys(blockPrices).map((block) => (
-                <option key={block} value={block}>
-                  {block} - ${blockPrices[block]}
-                </option>
-              ))}
-            </Field>
+              value={values.block}
+              disabled
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 sm:text-sm"
+            />
             <ErrorMessage
               name="block"
               component="div"
@@ -185,7 +176,7 @@ const PaymentForm: React.FC<ReservationFormProps> = ({ onSubmit }) => {
           </div>
           <div className="mb-4">
             <label
-              htmlFor="companyName"
+              htmlFor="codeReferal"
               className="block text-sm font-medium text-gray-700"
             >
               Code Referal
