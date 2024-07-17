@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import ServiceCard from "@/app/components/Card/serviceCard";
-import StatsCard from "@/app/components/statcard";
-import GuestAttendanceGraph from "@/app/components/guestgraph";
 import TransactionsList from "@/app/components/transactionlist";
+import StatsCard from "../../expo/components/statcard";
+import GuestAttendanceGraph from "../../expo/components/guestgraph";
 
 const DashboardOrganizerSection: React.FC = () => {
   // Example data, replace this with actual data from your backend
@@ -12,7 +12,7 @@ const DashboardOrganizerSection: React.FC = () => {
 
   return (
     <div>
-      <header className="bg-black text-white pt-32 pb-8">
+      <header className="bg-black text-white px-24 pb-8">
         <h1 className="text-2xl lg:text-6xl font-bold text-center">
           Dashboard
         </h1>
@@ -41,9 +41,9 @@ const DashboardOrganizerSection: React.FC = () => {
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
-              link="#"
-              title="Manage Conferences"
-              description="Set up and configure conferences"
+              link="/user/eventorganizer/manageevents"
+              title="Manage Event"
+              description="Set up and configure Event"
               icon="fi fi-ts-arrow-right"
             />
             <ServiceCard
@@ -52,21 +52,14 @@ const DashboardOrganizerSection: React.FC = () => {
               description="Add Monthly Event"
               icon="fi fi-ts-arrow-right"
             />
+            <ServiceCard
+              link="/user/eventorganizer/addvoucher"
+              title="Add Coupon"
+              description="Add Coupon for Discount"
+              icon="fi fi-ts-arrow-right"
+            />
           </div>
         </div>
-      </section>
-      <section className="container mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">
-          Guest Registrations and Attendance
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <StatsCard title="Registered Guests" count={registeredGuests} />
-          <StatsCard title="Attended Guests" count={attendedGuests} />
-        </div>
-      </section>
-      <section className="container mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">Guest Attendance Overview</h2>
-        <GuestAttendanceGraph />
       </section>
       <section className="container mx-auto p-4">
         <h2 className="text-2xl font-bold mb-4">Transactions</h2>

@@ -6,11 +6,13 @@ import RedButton from "./Button/redButton";
 import SignOutButton from "./Button/signOutButton";
 import { useSession } from "next-auth/react";
 import React from "react";
+import { UserSession } from "@/types/usersession";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useSession();
+  const user = session?.user as UserSession;
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -36,7 +38,8 @@ const Navbar = () => {
     <div
       className={`navbar h-24 fixed top-0 left-0 w-full z-30 transition-all duration-100 text-white items-center justify-start md:justify-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
-      }`}>
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown lg:hidden">
           {isDrawerOpen && (
@@ -46,13 +49,15 @@ const Navbar = () => {
                 <label
                   htmlFor="my-drawer"
                   className="btn btn-primary drawer-button"
-                  style={{ background: "transparent", border: "none" }}>
+                  style={{ background: "transparent", border: "none" }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-8"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="white">
+                    stroke="white"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -66,7 +71,8 @@ const Navbar = () => {
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"
-                  className="drawer-overlay"></label>
+                  className="drawer-overlay"
+                ></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-xl">
                   <li>
                     <Link href="/expo">Expo</Link>
@@ -80,6 +86,27 @@ const Navbar = () => {
                   <li>
                     <Link href="/dummy">Dummy</Link>
                   </li>
+                  {session && session.user ? (
+                    <>
+                      {user.role === "ROLE_COMPANY" && (
+                        <li>
+                          <Link href="/user/company">Dashboard</Link>
+                        </li>
+                      )}
+                      {user.role === "ROLE_USER" && (
+                        <li>
+                          <Link href="/user/guest">Dashboard</Link>
+                        </li>
+                      )}
+                      {user.role === "ROLE_ORGANIZER" && (
+                        <li>
+                          <Link href="/user/eventorganizer">Dashboard</Link>
+                        </li>
+                      )}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </div>
             </div>
@@ -110,6 +137,27 @@ const Navbar = () => {
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/dummy">Dummy</Link>
           </li>
+          {session && session.user ? (
+            <>
+              {user.role === "ROLE_COMPANY" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/company">Dashboard</Link>
+                </li>
+              )}
+              {user.role === "ROLE_USER" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/guest">Dashboard</Link>
+                </li>
+              )}
+              {user.role === "ROLE_ORGANIZER" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/eventorganizer">Dashboard</Link>
+                </li>
+              )}
+            </>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
       <div className="navbar-end">

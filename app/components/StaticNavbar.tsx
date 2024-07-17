@@ -3,9 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import RedButton from "./Button/redButton";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import SignOutBtn from "../dummy/signOutBtn";
+import SignOutButton from "./Button/signOutButton";
+import { UserSession } from "@/types/usersession";
 
 const StaticNavbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { data: session } = useSession();
+  const user = session?.user as UserSession;
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -57,9 +63,31 @@ const StaticNavbar = () => {
               <li>
                 <Link href="/dummy">Dummy</Link>
               </li>
+              {session && session.user ? (
+                <>
+                  {user.role === "ROLE_COMPANY" && (
+                    <li>
+                      <Link href="/user/company">Dashboard</Link>
+                    </li>
+                  )}
+                  {user.role === "ROLE_USER" && (
+                    <li>
+                      <Link href="/user/guest">Dashboard</Link>
+                    </li>
+                  )}
+                  {user.role === "ROLE_ORGANIZER" && (
+                    <li>
+                      <Link href="/user/eventorganizer">Dashboard</Link>
+                    </li>
+                  )}
+                </>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </div>
+
         <Link href="/">
           <div className="btn btn-ghost text-xl">
             <Image
@@ -85,11 +113,38 @@ const StaticNavbar = () => {
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/dummy">Dummy</Link>
           </li>
+          {session && session.user ? (
+            <>
+              {user.role === "ROLE_COMPANY" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/company">Dashboard</Link>
+                </li>
+              )}
+              {user.role === "ROLE_USER" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/guest">Dashboard</Link>
+                </li>
+              )}
+              {user.role === "ROLE_ORGANIZER" && (
+                <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
+                  <Link href="/user/eventorganizer">Dashboard</Link>
+                </li>
+              )}
+            </>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
-      <div className="navbar-end">
-        <RedButton title="Login" href="/login" />
-      </div>
+      {session && session.user ? (
+        <div className="navbar-end">
+          <SignOutButton />
+        </div>
+      ) : (
+        <div className="navbar-end">
+          <RedButton title="Login" href="/login" />
+        </div>
+      )}
     </div>
   );
 };

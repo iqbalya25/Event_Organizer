@@ -24,7 +24,7 @@ const DashboardGuestSection = () => {
 
   return (
     <div>
-      <header className="bg-black text-white pt-32 pb-8">
+      <header className="bg-black text-white py-24 pb-8">
         <h1 className="text-2xl lg:text-6xl font-bold text-center">
           Dashboard
         </h1>
