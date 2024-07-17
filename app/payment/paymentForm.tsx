@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import { Payment } from "@/types/paymentModel";
 
 interface ReservationFormProps {
   selectedBlock: string | null;
   onSubmit: (payment: Payment) => void;
+}
+
+interface BoothState {
+  id: number;
+  name: string;
+  booked: boolean;
+  categoryId: number;
 }
 
 const blockPrices: { [key: string]: number } = {
@@ -19,6 +27,27 @@ const blockPrices: { [key: string]: number } = {
   C2: 600,
   C3: 600,
 };
+
+const initialBooths: BoothState[] = [
+  { id: 1, name: "A1", booked: false, categoryId: 14 },
+  { id: 2, name: "A2", booked: false, categoryId: 14 },
+  { id: 3, name: "A3", booked: false, categoryId: 14 },
+  { id: 4, name: "A4", booked: false, categoryId: 14 },
+  { id: 5, name: "A5", booked: false, categoryId: 14 },
+  { id: 6, name: "A6", booked: false, categoryId: 14 },
+  { id: 7, name: "B1", booked: false, categoryId: 14 },
+  { id: 8, name: "B2", booked: false, categoryId: 14 },
+  { id: 9, name: "B3", booked: false, categoryId: 14 },
+  { id: 10, name: "B4", booked: false, categoryId: 14 },
+  { id: 11, name: "B5", booked: false, categoryId: 14 },
+  { id: 12, name: "B6", booked: false, categoryId: 14 },
+  { id: 13, name: "C1", booked: false, categoryId: 14 },
+  { id: 14, name: "C2", booked: false, categoryId: 14 },
+  { id: 15, name: "C3", booked: false, categoryId: 14 },
+  { id: 16, name: "C4", booked: false, categoryId: 14 },
+  { id: 17, name: "C5", booked: false, categoryId: 14 },
+  { id: 18, name: "C6", booked: false, categoryId: 14 },
+];
 
 const PaymentForm: React.FC<ReservationFormProps> = ({
   selectedBlock,
@@ -51,23 +80,61 @@ const PaymentForm: React.FC<ReservationFormProps> = ({
     reservationDate: Yup.date().required("Date is required"),
   });
 
-  const handleSubmit = (
+  const sendDataToBackend = async (data: BoothState) => {
+    try {
+      console.log("Sending data to backend:", data);
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/block/${data.id}`,
+        data
+      );
+      if (response.status === 200) {
+        console.log("Data successfully sent to backend:", response.data);
+      } else {
+        console.error("Failed to submit data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error sending data to backend:", error);
+    }
+  };
+
+  const handleSubmit = async (
     values: typeof initialValues,
     { resetForm }: { resetForm: () => void }
   ) => {
+    const booth = initialBooths.find((booth) => booth.name === values.block);
+
+    if (!booth) {
+      console.error("Booth not found for block:", values.block);
+      return;
+    }
+
     const payment: Payment = {
       id: Math.floor(Math.random() * 10000), // Example ID generation, replace with proper ID management
       companyName: values.companyName,
       block: values.block,
       email: values.email,
       reservationDate: values.reservationDate,
-      amount: values.amount,
+      amount: price, // Use the static price based on the selected block
       codeReferal: values.codeReferal,
       date: new Date().toISOString().split("T")[0],
       status: values.status,
     };
-    onSubmit(payment);
-    resetForm();
+
+    const boothData: BoothState = {
+      ...booth,
+      booked: true,
+    };
+
+    try {
+      // Send booth data to backend
+      await sendDataToBackend(boothData);
+
+      // If booth data is successfully sent, then proceed with the payment
+      onSubmit(payment);
+      resetForm();
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
   };
 
   return (

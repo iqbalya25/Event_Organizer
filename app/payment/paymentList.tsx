@@ -28,11 +28,17 @@ const PaymentList: React.FC<PaymentListProps> = ({ payments }) => {
               >
                 <td className="py-3 px-6 text-left">{payment.companyName}</td>
                 <td className="py-3 px-6 text-left">
-                  ${payment.amount.toLocaleString()}
+                  {payment.amount
+                    ? `$${payment.amount.toLocaleString()}`
+                    : "N/A"}
                 </td>
-                <td className="py-3 px-6 text-center">{payment.codeReferal}</td>
                 <td className="py-3 px-6 text-center">
-                  {new Date(payment.date).toLocaleDateString()}
+                  {payment.codeReferal || "N/A"}
+                </td>
+                <td className="py-3 px-6 text-center">
+                  {payment.date
+                    ? new Date(payment.date).toLocaleDateString()
+                    : "N/A"}
                 </td>
                 <td className="py-3 px-6 text-center">
                   <span

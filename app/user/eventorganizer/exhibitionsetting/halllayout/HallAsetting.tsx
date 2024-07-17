@@ -9,30 +9,9 @@ interface BoothState {
   categoryId: number;
 }
 
-const initialBooths: BoothState[] = [
-  { id: 1, name: "A1", booked: false, categoryId: 14 },
-  { id: 2, name: "A2", booked: false, categoryId: 14 },
-  { id: 3, name: "A3", booked: false, categoryId: 14 },
-  { id: 4, name: "A4", booked: false, categoryId: 14 },
-  { id: 5, name: "A5", booked: false, categoryId: 14 },
-  { id: 6, name: "A6", booked: false, categoryId: 14 },
-  { id: 7, name: "B1", booked: false, categoryId: 14 },
-  { id: 8, name: "B2", booked: false, categoryId: 14 },
-  { id: 9, name: "B3", booked: false, categoryId: 14 },
-  { id: 10, name: "B4", booked: false, categoryId: 14 },
-  { id: 11, name: "B5", booked: false, categoryId: 14 },
-  { id: 12, name: "B6", booked: false, categoryId: 14 },
-  { id: 13, name: "C1", booked: false, categoryId: 14 },
-  { id: 14, name: "C2", booked: false, categoryId: 14 },
-  { id: 15, name: "C3", booked: false, categoryId: 14 },
-  { id: 16, name: "C4", booked: false, categoryId: 14 },
-  { id: 17, name: "C5", booked: false, categoryId: 14 },
-  { id: 18, name: "C6", booked: false, categoryId: 14 },
-];
-
 const HallASetting: React.FC = () => {
-  const [booths, setBooths] = useState<BoothState[]>(initialBooths);
-  const [savedBooths, setSavedBooths] = useState<BoothState[]>(initialBooths);
+  const [booths, setBooths] = useState<BoothState[]>([]);
+  const [savedBooths, setSavedBooths] = useState<BoothState[]>([]);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,15 +24,20 @@ const HallASetting: React.FC = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/block/category/14`
       );
-      const fetchedBooths = response.data.data;
-      const updatedBooths = booths.map((booth) => {
-        const fetchedBooth = fetchedBooths.find(
-          (fetched: BoothState) => fetched.id === booth.id
-        );
-        return fetchedBooth ? { ...booth, booked: fetchedBooth.booked } : booth;
+      const fetchedBooths: BoothState[] = response.data.data;
+
+      // Sort the fetched booths
+      const sortedBooths = fetchedBooths.sort((a, b) => {
+        const [blockA, numberA] = [a.name[0], parseInt(a.name.slice(1), 10)];
+        const [blockB, numberB] = [b.name[0], parseInt(b.name.slice(1), 10)];
+
+        if (blockA < blockB) return -1;
+        if (blockA > blockB) return 1;
+        return numberA - numberB;
       });
-      setBooths(updatedBooths);
-      setSavedBooths(updatedBooths);
+
+      setBooths(sortedBooths);
+      setSavedBooths(sortedBooths);
       setError(null);
     } catch (error) {
       console.error("Error fetching booth data:", error);
