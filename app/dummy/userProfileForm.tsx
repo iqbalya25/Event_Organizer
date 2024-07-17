@@ -2,14 +2,12 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { uploadImageToCloudinary } from "../../utils/uploadFileToCloudinary";
-// Sesuaikan path impor
 
 const UserProfileForm = () => {
   return (
     <Formik
-      initialValues={{ username: "", photoProfile: null }}
+      initialValues={{ username: "", photoProfile: null as File | null }}
       validationSchema={Yup.object({
         username: Yup.string().required("Required"),
         photoProfile: Yup.mixed().required("A file is required"),
@@ -32,36 +30,44 @@ const UserProfileForm = () => {
             photoProfileLink: photoProfileLink,
           };
 
-          await axios.post(
-            "http://localhost:8080/api/user/profile",
-            userProfile
+          console.log("User Profile:", userProfile);
+          alert(
+            `Submission successful!\nUsername: ${userProfile.username}\nPhoto URL: ${userProfile.photoProfileLink}`
           );
         } catch (error) {
           console.error("Error submitting form:", error);
-          alert("An error occurred while submitting the form");
+          if (error instanceof Error) {
+            alert(`An error occurred: ${error.message}`);
+          } else {
+            alert(`An unexpected error occurred: ${JSON.stringify(error)}`);
+          }
         } finally {
           setSubmitting(false);
         }
       }}>
       {({ setFieldValue }) => (
         <Form>
-          <label htmlFor="username">Username</label>
-          <Field name="username" type="text" />
-          <ErrorMessage name="username" />
+          <div className="mt-48">
+            <label htmlFor="username">Username</label>
+            <Field name="username" type="text" />
+            <ErrorMessage name="username" component="div" />
+          </div>
 
-          <label htmlFor="photoProfile">Photo Profile</label>
-          <input
-            name="photoProfile"
-            type="file"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const file =
-                event.currentTarget.files && event.currentTarget.files[0];
-              if (file) {
-                setFieldValue("photoProfile", file);
-              }
-            }}
-          />
-          <ErrorMessage name="photoProfile" />
+          <div>
+            <label htmlFor="photoProfile">Photo Profile</label>
+            <input
+              id="photoProfile"
+              name="photoProfile"
+              type="file"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                const file = event.currentTarget.files?.[0];
+                if (file) {
+                  setFieldValue("photoProfile", file);
+                }
+              }}
+            />
+            <ErrorMessage name="photoProfile" component="div" />
+          </div>
 
           <button type="submit">Submit</button>
         </Form>
