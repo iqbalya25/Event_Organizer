@@ -1,10 +1,17 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import PaymentSection from "@/app/payment/paymentSection";
 import HallBLayout from "./layout/HallB";
-
+import { Payment } from "@/types/paymentModel";
 
 const ExhibitionHallB = () => {
+  const [selectedBlock, setSelectedBlock] = useState<string | null>(null);
+  const [bookedBooth, setBookedBooth] = useState<string | null>(null);
+
+  const handleAddPayment = (payment: Payment) => {
+    setBookedBooth(payment.block);
+  };
+
   return (
     <div>
       <div className="mb-4 mx-auto">
@@ -28,7 +35,10 @@ const ExhibitionHallB = () => {
           <li>Emergency Medical Services</li>
         </ul>
       </div>
-      <PaymentSection />
+      <PaymentSection
+        selectedBlock={selectedBlock}
+        onAddPayment={handleAddPayment}
+      />
     </div>
   );
 };
