@@ -1,16 +1,26 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import PaymentSection from "@/app/payment/paymentSection";
+
+import { Payment } from "@/types/paymentModel";
 import HallALayout from "./layout/HallA";
 
-
-
 const ExhibitionHallA = () => {
+  const [selectedBlock, setSelectedBlock] = useState<string | null>(null);
+  const [bookedBooth, setBookedBooth] = useState<string | null>(null);
+
+  const handleAddPayment = (payment: Payment) => {
+    setBookedBooth(payment.block);
+  };
+
   return (
     <div>
       <div className="mb-4 mx-auto ">
         <h1 className="mb-2 text-2xl font-bold">Hall A Details</h1>
-        <HallALayout />
+        <HallALayout
+          bookedBooth={bookedBooth}
+          onSelectBooth={setSelectedBlock}
+        />
         <p className="mb-2">
           Layout: Large open space suitable for exhibitions and events.
         </p>
@@ -29,7 +39,10 @@ const ExhibitionHallA = () => {
           <li>Dedicated Event Management Team</li>
         </ul>
       </div>
-      <PaymentSection />
+      <PaymentSection
+        selectedBlock={selectedBlock}
+        onAddPayment={handleAddPayment}
+      />
     </div>
   );
 };

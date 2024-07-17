@@ -1,383 +1,206 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 interface BoothState {
-  A1: boolean;
-  A2: boolean;
-  A3: boolean;
-  A4: boolean;
-  A5: boolean;
-  A6: boolean;
-  B1: boolean;
-  B2: boolean;
-  B3: boolean;
-  B4: boolean;
-  B5: boolean;
-  B6: boolean;
+  id: number;
+  name: string;
+  booked: boolean;
+  categoryId: number;
 }
 
-const initialBooths: BoothState = {
-  A1: true,
-  A2: true,
-  A3: true,
-  A4: true,
-  A5: true,
-  A6: true,
-  B1: true,
-  B2: true,
-  B3: true,
-  B4: true,
-  B5: true,
-  B6: true,
-};
+const initialBooths: BoothState[] = [
+  { id: 19, name: "A1", booked: false, categoryId: 15 },
+  { id: 20, name: "A2", booked: false, categoryId: 15 },
+  { id: 21, name: "A3", booked: false, categoryId: 15 },
+  { id: 22, name: "A4", booked: false, categoryId: 15 },
+  { id: 23, name: "A5", booked: false, categoryId: 15 },
+  { id: 24, name: "A6", booked: false, categoryId: 15 },
+  { id: 25, name: "B1", booked: false, categoryId: 15 },
+  { id: 26, name: "B2", booked: false, categoryId: 15 },
+  { id: 27, name: "B3", booked: false, categoryId: 15 },
+  { id: 28, name: "B4", booked: false, categoryId: 15 },
+  { id: 29, name: "B5", booked: false, categoryId: 15 },
+  { id: 30, name: "B6", booked: false, categoryId: 15 },
+];
 
 const HallBSetting: React.FC = () => {
-  const [booths, setBooths] = useState<BoothState>(initialBooths);
+  const [booths, setBooths] = useState<BoothState[]>(initialBooths);
+  const [savedBooths, setSavedBooths] = useState<BoothState[]>(initialBooths);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleBoothClick = (booth: keyof BoothState) => {
-    setBooths({ ...booths, [booth]: !booths[booth] });
+  useEffect(() => {
+    fetchBoothData();
+  }, []);
+
+  const fetchBoothData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/block/category/15`
+      );
+      const fetchedBooths = response.data.data;
+      const updatedBooths = booths.map((booth) => {
+        const fetchedBooth = fetchedBooths.find(
+          (fetched: BoothState) => fetched.id === booth.id
+        );
+        return fetchedBooth ? { ...booth, booked: fetchedBooth.booked } : booth;
+      });
+      setBooths(updatedBooths);
+      setSavedBooths(updatedBooths);
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching booth data:", error);
+      setError("Error fetching booth data");
+    }
   };
 
-  const handleSave = () => {
+  const sendDataToBackend = async (data: BoothState[]) => {
+    try {
+      const promises = data.map((booth) =>
+        axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/block/${booth.id}`,
+          booth
+        )
+      );
+      await Promise.all(promises);
+      setError(null);
+    } catch (error) {
+      console.error("Error sending data to backend:", error);
+      setError("Error sending data to backend");
+    }
+  };
+
+  const handleBoothClick = (id: number) => {
+    setBooths((prevBooths) =>
+      prevBooths.map((booth) =>
+        booth.id === id ? { ...booth, booked: !booth.booked } : booth
+      )
+    );
+  };
+
+  const handleSave = async () => {
+    const changedBooths = booths.filter(
+      (booth) =>
+        booth.booked !==
+        savedBooths.find((savedBooth) => savedBooth.id === booth.id)?.booked
+    );
+    await sendDataToBackend(changedBooths);
+    setSavedBooths(booths);
     setSaved(true);
   };
 
+  const handleCancel = () => {
+    setBooths(savedBooths);
+  };
+
+  const renderBooth = (booth: BoothState) => (
+    <div
+      key={booth.id}
+      className={`w-16 h-16 border flex items-center justify-center 
+        ${booth.booked ? "bg-red-500" : "bg-gray-200 hover:bg-gray-400"} 
+        mr-4 cursor-pointer`}
+      onClick={() => handleBoothClick(booth.id)}
+    >
+      {booth.name}
+    </div>
+  );
+
+  const renderBlockRow = (blockName: string, startIndex: number) => (
+    <div className="flex mb-4">
+      <div className="font-bold mr-8 flex items-center">{blockName}</div>
+      <div className="flex">
+        {booths
+          .slice(startIndex, startIndex + 3)
+          .map((booth) => renderBooth(booth))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="overflow-x-scroll">
-      {!saved ? (
-        <div className="flex flex-col ml-5 lg:items-center my-8">
-          <div className="w-[56rem] p-4 mb-8 border border-gray-300 bg-white shadow-lg relative ">
-            <h2 className="text-2xl font-bold mb-4 text-center">Hall B</h2>
-            {/* Top Doors */}
-            <div className="absolute left-1/4 top-0 transform -translate-y-1/2 flex">
-              <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
-                Entrance
-              </div>
-              <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
-                Exit
-              </div>
+      <div className="flex flex-col items-center my-8">
+        <div className="w-[60rem] p-4 mb-8 border border-gray-300 bg-white shadow-lg relative">
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            {saved ? "Hall B - Saved Layout" : "Hall B"}
+          </h2>
+
+          {error && (
+            <div className="text-red-500 text-center mb-4">{error}</div>
+          )}
+
+          {/* Top Doors */}
+          <div className="absolute left-1/4 top-0 transform -translate-y-1/2 flex">
+            <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
+              Entrance
             </div>
-            <div className="absolute right-1/4 top-0 transform -translate-y-1/2 flex">
-              <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
-                Entrance
-              </div>
-              <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
-                Exit
-              </div>
-            </div>
-            {/* Bottom Doors */}
-            <div className="absolute left-1/4 bottom-0 transform translate-y-1/2 flex">
-              <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
-                Entrance
-              </div>
-              <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
-                Exit
-              </div>
-            </div>
-            <div className="absolute right-1/4 bottom-0 transform translate-y-1/2 flex">
-              <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
-                Entrance
-              </div>
-              <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
-                Exit
-              </div>
-            </div>
-            {/* Sections */}
-            <div className="flex justify-around">
-              {/* Section 1 */}
-              <div className="flex flex-col items-center">
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block A
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A1
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("A1")}
-                    >
-                      A1
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A2
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("A2")}
-                    >
-                      A2
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A3
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } cursor-pointer`}
-                      onClick={() => handleBoothClick("A3")}
-                    >
-                      A3
-                    </div>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block B
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B1
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("B1")}
-                    >
-                      B1
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B2
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("B2")}
-                    >
-                      B2
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B3
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } cursor-pointer`}
-                      onClick={() => handleBoothClick("B3")}
-                    >
-                      B3
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Section 2 */}
-              <div className="flex flex-col items-center">
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block A
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A4
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("A4")}
-                    >
-                      A4
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A5
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("A5")}
-                    >
-                      A5
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A6
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } cursor-pointer`}
-                      onClick={() => handleBoothClick("A6")}
-                    >
-                      A6
-                    </div>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block B
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B4
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("B4")}
-                    >
-                      B4
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B5
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } mr-4 cursor-pointer`}
-                      onClick={() => handleBoothClick("B5")}
-                    >
-                      B5
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B6
-                          ? "bg-gray-200 hover:bg-gray-400"
-                          : "bg-red-500"
-                      } cursor-pointer`}
-                      onClick={() => handleBoothClick("B6")}
-                    >
-                      B6
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
+              Exit
             </div>
           </div>
+          <div className="absolute right-1/4 top-0 transform -translate-y-1/2 flex">
+            <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
+              Entrance
+            </div>
+            <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
+              Exit
+            </div>
+          </div>
+          {/* Bottom Doors */}
+          <div className="absolute left-1/4 bottom-0 transform translate-y-1/2 flex">
+            <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
+              Entrance
+            </div>
+            <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
+              Exit
+            </div>
+          </div>
+          <div className="absolute right-1/4 bottom-0 transform translate-y-1/2 flex">
+            <div className="px-2 py-1 bg-blue-500 text-white rounded-l">
+              Entrance
+            </div>
+            <div className="px-2 py-1 bg-red-500 text-white rounded-r ml-2">
+              Exit
+            </div>
+          </div>
+
+          {/* Booths Layout */}
+          <div className="flex justify-between px-8">
+            <div>
+              {renderBlockRow("Block A", 0)}
+              {renderBlockRow("Block B", 6)}
+            </div>
+            <div>
+              {renderBlockRow("Block A", 3)}
+              {renderBlockRow("Block B", 9)}
+            </div>
+          </div>
+        </div>
+
+        {!saved ? (
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={handleSave}
+              className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+            >
+              Save Layout
+            </button>
+            <button
+              onClick={handleCancel}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Cancel Changes
+            </button>
+          </div>
+        ) : (
           <button
-            onClick={handleSave}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={() => setSaved(false)}
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
           >
-            Save Layout
+            Edit Layout
           </button>
-        </div>
-      ) : (
-        <div className="flex flex-col ml-5 lg:items-center my-8">
-          <div className="w-[56rem] p-4 mb-8 border border-gray-300 bg-white shadow-lg relative ">
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Hall B - Saved Layout
-            </h2>
-            {/* Sections */}
-            <div className="flex justify-around">
-              {/* Section 1 */}
-              <div className="flex flex-col items-center">
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block A
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A1 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      A1
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A2 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      A2
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A3 ? "bg-gray-200" : "bg-red-500"
-                      }`}
-                    >
-                      A3
-                    </div>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block B
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B1 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      B1
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B2 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      B2
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B3 ? "bg-gray-200" : "bg-red-500"
-                      }`}
-                    >
-                      B3
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Section 2 */}
-              <div className="flex flex-col items-center">
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block A
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A4 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      A4
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A5 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      A5
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.A6 ? "bg-gray-200" : "bg-red-500"
-                      }`}
-                    >
-                      A6
-                    </div>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  <div className="font-bold mr-8 flex items-center">
-                    Block B
-                  </div>
-                  <div className="flex">
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B4 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      B4
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B5 ? "bg-gray-200" : "bg-red-500"
-                      } mr-4`}
-                    >
-                      B5
-                    </div>
-                    <div
-                      className={`w-16 h-16 border flex items-center justify-center ${
-                        booths.B6 ? "bg-gray-200" : "bg-red-500"
-                      }`}
-                    >
-                      B6
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
