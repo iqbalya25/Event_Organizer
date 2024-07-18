@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { format } from "date-fns";
+import { uploadImageToCloudinary } from "@/utils/uploadFileToCloudinary";
 
 interface EventFormProps {
   onAddEvent: (event: {
@@ -41,7 +43,7 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
       address: Yup.string().required("Required"),
       city: Yup.string().required("Required"),
       websiteUrl: Yup.string().url("Invalid URL").required("Required"),
-      imageUrl: Yup.string().url("Invalid URL").required("Required"),
+      imageUrl: Yup.string().required("Required"),
       description: Yup.string().required("Required"),
       capacity: Yup.number().positive("Must be positive").required("Required"),
       dateStart: Yup.date().required("Required"),
@@ -154,20 +156,43 @@ const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
           ) : null}
         </div>
         <div>
-          <label className="block text-gray-700 font-semibold">Image URL</label>
+          <label className="block text-gray-700 font-semibold">
+            Image Upload
+          </label>
           <input
-            type="url"
-            {...formik.getFieldProps("imageUrl")}
-            className={`bg-gray-200 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-              formik.touched.imageUrl && formik.errors.imageUrl
-                ? "border-red-500"
-                : ""
-            }`}
+            type="file"
+            id="imageUrl"
+            name="imageUrl"
+            onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
+              const file =
+                event.currentTarget.files && event.currentTarget.files[0];
+              if (file) {
+                try {
+                  const imageUrl = await uploadImageToCloudinary(file);
+                  formik.setFieldValue("imageUrl", imageUrl);
+                } catch (uploadError) {
+                  console.error("Upload error:", uploadError);
+                }
+              }
+            }}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
           {formik.touched.imageUrl && formik.errors.imageUrl ? (
             <div className="text-red-500 text-sm">{formik.errors.imageUrl}</div>
           ) : null}
         </div>
+        {formik.values.imageUrl && (
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Uploaded Image
+            </label>
+            <img
+              src={formik.values.imageUrl}
+              alt="Uploaded"
+              className="mt-2 h-40 w-40 object-cover rounded-md shadow-md"
+            />
+          </div>
+        )}
         <div>
           <label className="block text-gray-700 font-semibold">
             Description
