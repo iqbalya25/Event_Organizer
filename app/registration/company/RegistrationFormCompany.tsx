@@ -47,7 +47,10 @@ const CompanyRegisterForm: React.FC = () => {
     profileUrl: Yup.string().required("Profile picture is required"),
   });
 
-  const handleSubmit = async (values: CompanyRegisterFormValues) => {
+  const handleSubmit = async (
+    values: CompanyRegisterFormValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
     console.log("Form Values:", values); // Print form values to the console
 
     try {
@@ -71,6 +74,7 @@ const CompanyRegisterForm: React.FC = () => {
       const data = await response.json();
       console.log("Company registered successfully:", data);
       alert("Company registered successfully!"); // Add user feedback here
+      resetForm();
     } catch (error) {
       console.error("Error registering company:", error);
       alert("Error registering company, please try again later."); // Add user feedback here
