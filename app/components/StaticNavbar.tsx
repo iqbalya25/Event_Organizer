@@ -86,17 +86,17 @@ const StaticNavbar = () => {
               )}
               {session && session.user ? (
                 <>
-                  {session.user.role === "ROLE_COMPANY" && (
+                  {user.role === "ROLE_COMPANY" && (
                     <li>
                       <Link href="/user/company">Dashboard</Link>
                     </li>
                   )}
-                  {session.user.role === "ROLE_USER" && (
+                  {user.role === "ROLE_USER" && (
                     <li>
                       <Link href="/user/guest">Dashboard</Link>
                     </li>
                   )}
-                  {session.user.role === "ROLE_ORGANIZER" && (
+                  {user.role === "ROLE_ORGANIZER" && (
                     <li>
                       <Link href="/user/eventorganizer">Dashboard</Link>
                     </li>
@@ -157,17 +157,17 @@ const StaticNavbar = () => {
           )}
           {session && session.user ? (
             <>
-              {session.user.role === "ROLE_COMPANY" && (
+              {user.role === "ROLE_COMPANY" && (
                 <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
                   <Link href="/user/company">Dashboard</Link>
                 </li>
               )}
-              {session.user.role === "ROLE_USER" && (
+              {user.role === "ROLE_USER" && (
                 <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
                   <Link href="/user/guest">Dashboard</Link>
                 </li>
               )}
-              {session.user.role === "ROLE_ORGANIZER" && (
+              {user.role === "ROLE_ORGANIZER" && (
                 <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
                   <Link href="/user/eventorganizer">Dashboard</Link>
                 </li>
