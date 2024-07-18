@@ -12,6 +12,14 @@ interface AddSpeakerFormProps {
   eventId: string;
 }
 
+interface SpeakerFormValues {
+  name: string;
+  position: string;
+  companyName: string;
+  eventId: string;
+  profileImgUrl: string;
+}
+
 const AddSpeakerForm: React.FC<AddSpeakerFormProps> = ({ eventId }) => {
   const { data: session } = useSession();
   const user = session?.user as UserSession;

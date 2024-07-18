@@ -20,11 +20,14 @@ const EventSpeakers: React.FC<EventSpeakersProps> = ({ speakers = [] }) => {
               alt={speaker.name}
               className="w-full h-48 object-cover rounded-full mx-auto"
             />
+            
             <h3 className="text-xl font-semibold mt-2">{speaker.name}</h3>
             <p className="text-gray-500">{speaker.position}</p>
           </div>
         ))}
+    
       </div>
+      
     </div>
   );
 };
