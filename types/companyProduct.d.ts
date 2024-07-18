@@ -3,9 +3,7 @@
 export interface Product {
   name: string;
   description: string;
-  companyId: number | null;
   imageUrl: string | null;
-  slug: string;
 }
 
 export interface Company {

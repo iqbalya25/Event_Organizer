@@ -1,12 +1,15 @@
-
 import React from "react";
 import { MonthEvents } from "@/types/eventTypes";
+import StatsCard from "../components/statcard";
+import GuestAttendanceGraph from "../components/guestgraph";
 
 interface EventDetailProps {
   event: MonthEvents;
 }
 
 const EventDetail: React.FC<EventDetailProps> = ({ event }) => {
+  
+
   return (
     <div className="bg-gray-900 text-white">
       <div className="relative">
@@ -28,6 +31,8 @@ const EventDetail: React.FC<EventDetailProps> = ({ event }) => {
           <h2 className="text-4xl font-semibold mb-4">Event Details</h2>
         </div>
       </div>
+      
+      
     </div>
   );
 };
