@@ -1,3 +1,5 @@
+// File: src/app/expo/[eventSlug]/page.tsx
+
 "use client";
 
 import React, { useState } from "react";
@@ -16,6 +18,7 @@ import { UserSession } from "@/types/usersession";
 import CommentBox from "../components/CommentBox";
 import AddSpeakerForm from "../addspeaker/addspeakerform";
 import StarRating from "../components/Rating";
+import EventRegistration from "../components/EventRegistration";
 
 const fetchEventBySlug = async (slug: string): Promise<MonthEvents> => {
   const response = await axios.get(
@@ -136,21 +139,24 @@ const EventDetailPage = () => {
       )}
 
       {session && session.user && user.role === "ROLE_USER" && (
-        <section className="container mx-auto p-4">
-          <h2 className="text-2xl font-bold mb-4">Make a Review</h2>
-          <div className="bg-white p-4 shadow rounded-lg">
-            <div className="py-5">
-              <StarRating onRatingChange={handleRatingChange} />
+        <>
+          <section className="container mx-auto p-4">
+            <EventRegistration eventId={event.id} eventName={event.name} />
+            <h2 className="text-2xl font-bold mb-4">Make a Review</h2>
+            <div className="bg-white p-4 shadow rounded-lg">
+              <div className="py-5">
+                <StarRating onRatingChange={handleRatingChange} />
+              </div>
+              <CommentBox onCommentChange={handleCommentChange} />
+              <button
+                className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-200 mt-4"
+                onClick={handleSubmitReview}
+              >
+                Submit Review
+              </button>
             </div>
-            <CommentBox onCommentChange={handleCommentChange} />
-            <button
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-200 mt-4"
-              onClick={handleSubmitReview}
-            >
-              Submit Review
-            </button>
-          </div>
-        </section>
+          </section>
+        </>
       )}
     </div>
   );
