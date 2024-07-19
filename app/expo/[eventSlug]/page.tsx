@@ -21,7 +21,6 @@ import StarRating from "../components/Rating";
 
 import EventRegistration from "../components/EventRegistration";
 
-
 const fetchEventBySlug = async (slug: string): Promise<MonthEvents> => {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}api/v1/event/${slug}`
@@ -137,7 +136,6 @@ const EventDetailPage = () => {
               <AddSpeakerForm eventId={event.id.toString()} />
             </section>
           )}
-
         </>
       )}
 
@@ -159,26 +157,7 @@ const EventDetailPage = () => {
               </button>
             </div>
           </section>
-
         </>
-      )}
-
-      {session && session.user && user.role === "ROLE_USER" && (
-        <section className="container mx-auto p-4">
-          <h2 className="text-2xl font-bold mb-4">Make a Review</h2>
-          <div className="bg-white p-4 shadow rounded-lg">
-            <div className="py-5">
-              <StarRating onRatingChange={handleRatingChange} />
-            </div>
-            <CommentBox onCommentChange={handleCommentChange} />
-            <button
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-200 mt-4"
-              onClick={handleSubmitReview}
-            >
-              Submit Review
-            </button>
-          </div>
-        </section>
       )}
     </div>
   );
