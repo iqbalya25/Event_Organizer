@@ -12,6 +12,7 @@ interface AddSpeakerFormProps {
   eventId: string;
 }
 
+
 interface SpeakerFormValues {
   name: string;
   position: string;
@@ -19,6 +20,7 @@ interface SpeakerFormValues {
   eventId: string;
   profileImgUrl: string;
 }
+
 
 const AddSpeakerForm: React.FC<AddSpeakerFormProps> = ({ eventId }) => {
   const { data: session } = useSession();
