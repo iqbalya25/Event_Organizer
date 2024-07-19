@@ -83,7 +83,7 @@ const PaymentForm: React.FC<ReservationFormProps> = ({
   const sendDataToBackend = async (data: BoothState) => {
     try {
       console.log("Sending data to backend:", data);
-      const response = await axios.put(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/block/${data.id}`,
         data
       );
