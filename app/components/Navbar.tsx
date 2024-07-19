@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -37,14 +36,14 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar h-24 fixed top-0 left-0 w-full z-99 transition-all duration-100 text-white items-center justify-start md:justify-center ${
+      className={`navbar h-24 fixed top-0 left-0 w-full z-50 transition-all duration-100 text-white items-center justify-start md:justify-center ${
         isScrolled ? "bg-black" : "bg-base-100 bg-opacity-0"
       }`}
     >
       <div className="navbar-start">
         <div className="dropdown lg:hidden">
           {isDrawerOpen && (
-            <div className="drawer" style={{ zIndex: 9999 }}>
+            <div className="drawer" style={{ zIndex: 30 }}>
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 <label
