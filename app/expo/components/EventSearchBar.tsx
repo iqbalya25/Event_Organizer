@@ -74,7 +74,10 @@ const EventSearchBar: React.FC<EventSearchBarProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col items-center w-full mb-4">
+    <div
+      className="relative flex flex-col items-center w-full mb-4"
+      style={{ zIndex: 40 }}
+    >
       <div className="relative w-full flex items-center">
         <input
           type="text"
@@ -94,7 +97,7 @@ const EventSearchBar: React.FC<EventSearchBarProps> = ({
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-lg"
+          className="absolute z-30 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-lg"
           style={{ top: "100%" }}
         >
           {suggestions.map((event, index) => (

@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
         redirect: true,
         email: values.email,
         password: values.password,
-        callbackUrl: "/dummy",
+        callbackUrl: "/",
       });
     } catch (error) {
       console.error("Unexpected error during login:", error);
