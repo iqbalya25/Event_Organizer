@@ -18,7 +18,6 @@ import { UserSession } from "@/types/usersession";
 import CommentBox from "../components/CommentBox";
 import AddSpeakerForm from "../addspeaker/addspeakerform";
 import StarRating from "../components/Rating";
-
 import EventRegistration from "../components/EventRegistration";
 
 const fetchEventBySlug = async (slug: string): Promise<MonthEvents> => {
@@ -142,7 +141,7 @@ const EventDetailPage = () => {
       {session && session.user && user.role === "ROLE_USER" && (
         <>
           <section className="container mx-auto p-4">
-            <EventRegistration eventId={event.id} eventName={event.name} />
+            <EventRegistration event={event} />
             <h2 className="text-2xl font-bold mb-4">Make a Review</h2>
             <div className="bg-white p-4 shadow rounded-lg">
               <div className="py-5">
