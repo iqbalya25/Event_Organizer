@@ -1,4 +1,5 @@
 // components/CompanyCard.tsx
+
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -7,26 +8,39 @@ import SearchBarCompany from "./SearchBarCompany";
 import { Company } from "@/types/companyProduct";
 
 const CompanyCard: React.FC = () => {
-  const { data: companies, error, isLoading } = useCompanies();
+  const [page, setPage] = useState(1);
+  const limit = 5; // Number of companies per page
+  const { data, error, isLoading } = useCompanies(page, limit);
   const [filteredCompanies, setFilteredCompanies] = useState<Company[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
 
   if (isLoading) return <div>Loading...</div>;
   if (error instanceof Error) return <div>Error: {error.message}</div>;
 
-  if (!companies || companies.length === 0)
-    return <div>No companies found</div>;
+  if (!data || data.data.length === 0) return <div>No companies found</div>;
 
   const handleSearch = (matchingCompanies: Company[]) => {
     setFilteredCompanies(matchingCompanies);
     setHasSearched(true);
   };
 
-  const companiesToDisplay = hasSearched ? filteredCompanies : companies;
+  const companiesToDisplay = hasSearched ? filteredCompanies : data.data;
+
+  const handleNextPage = () => {
+    if (data.data.length === limit) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
     <div>
-      <SearchBarCompany companies={companies} onSearch={handleSearch} />
+      <SearchBarCompany companies={data.data} onSearch={handleSearch} />
       {hasSearched && filteredCompanies.length === 0 ? (
         <div className="text-center py-4">No matching companies found</div>
       ) : (
@@ -37,7 +51,7 @@ const CompanyCard: React.FC = () => {
                 <div className="text-center p-5 flex flex-col justify-center gap-10 lg:flex-row lg:justify-normal bg-white">
                   <div className="w-40 h-40 flex items-center justify-center">
                     <img
-                      src={company.profileUrl}
+                      src={company.profileUrl || "/placeholder-image.jpg"}
                       alt={`${company.name} logo`}
                       className="max-w-full max-h-full object-contain"
                     />
@@ -75,6 +89,22 @@ const CompanyCard: React.FC = () => {
           ))}
         </div>
       )}
+      <div className="flex justify-center mt-4">
+        <button
+          className="bg-gray-300 text-black px-4 py-2 m-2 rounded"
+          onClick={handlePreviousPage}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-gray-300 text-black px-4 py-2 m-2 rounded"
+          onClick={handleNextPage}
+          disabled={data.data.length < limit}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
