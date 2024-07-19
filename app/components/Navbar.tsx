@@ -83,9 +83,6 @@ const Navbar = () => {
                   <li>
                     <Link href="/about">About Us</Link>
                   </li>
-                  <li>
-                    <Link href="/dummy">Dummy</Link>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -112,9 +109,6 @@ const Navbar = () => {
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/about">About Us</Link>
-          </li>
-          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/dummy">Dummy</Link>
           </li>
           {session && session.user ? (
             <>

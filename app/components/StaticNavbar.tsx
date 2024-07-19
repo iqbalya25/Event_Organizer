@@ -60,9 +60,7 @@ const StaticNavbar = () => {
               <li>
                 <Link href="/about">About Us</Link>
               </li>
-              <li>
-                <Link href="/dummy">Dummy</Link>
-              </li>
+
               {session && session.user ? (
                 <>
                   {user.role === "ROLE_COMPANY" && (
@@ -109,9 +107,6 @@ const StaticNavbar = () => {
           </li>
           <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
             <Link href="/about">About Us</Link>
-          </li>
-          <li className="hover:bg-white hover:bg-opacity-10 hover:shadow-lg transition-all duration-300 rounded-md">
-            <Link href="/dummy">Dummy</Link>
           </li>
           {session && session.user ? (
             <>
