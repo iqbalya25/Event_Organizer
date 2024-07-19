@@ -1,6 +1,8 @@
+// File: src/components/EventRegistration.tsx
+
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { UserSession } from "@/types/usersession";
 import axios from "axios";
@@ -17,7 +19,7 @@ interface TicketData {
   hourStart: string;
   hourEnd: string;
   city: string;
-  eventType: string;
+  eventType: string | null;
   eventName: string;
   userId: number;
   firstName: string;
@@ -30,11 +32,12 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
   const { data: session } = useSession();
   const user = session?.user as UserSession;
 
-  const [ticket, setTicket] = useState<MonthEvents | null>(null);
+  const [ticket, setTicket] = useState<TicketData | null>(null);
 
   const handleRegister = async () => {
     if (user) {
       try {
+        // Register the event
         const registerResponse = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}api/v1/tickets`,
           { eventId: event.id },
@@ -46,6 +49,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
         );
 
         if (registerResponse.status === 200) {
+          // Fetch the ticket details
           const ticketResponse = await axios.get(
             `${process.env.NEXT_PUBLIC_API_URL}api/v1/tickets/event/${event.id}`,
             {
@@ -55,9 +59,10 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
             }
           );
 
-          const ticketData = ticketResponse.data;
+          const ticketData: TicketData = ticketResponse.data;
           setTicket(ticketData);
           alert("Ticket registered successfully!");
+          console.log(ticketData);
         } else {
           throw new Error("Failed to register ticket");
         }
@@ -86,7 +91,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
         <div className="mt-4 p-4 border border-gray-300 rounded shadow-md">
           <h2 className="text-xl font-bold mb-2">Ticket</h2>
           <p>
-            <strong>Event:</strong> {ticket.name}
+            <strong>Event:</strong> {ticket.eventName}
           </p>
           <p>
             <strong>Start Date:</strong> {ticket.dateStart}
@@ -102,6 +107,15 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
           </p>
           <p>
             <strong>City:</strong> {ticket.city}
+          </p>
+          <p>
+            <strong>User:</strong> {ticket.firstName} {ticket.lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {ticket.email}
+          </p>
+          <p>
+            <strong>Ticket Code:</strong> {ticket.ticketCode}
           </p>
         </div>
       )}
