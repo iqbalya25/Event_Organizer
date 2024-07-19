@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { UserSession } from "@/types/usersession";
 import axios from "axios";
@@ -59,10 +59,14 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
             }
           );
 
-          const ticketData: TicketData = ticketResponse.data;
-          setTicket(ticketData);
+          const ticketDataArray = ticketResponse.data.data; // This is an array
+          if (ticketDataArray.length > 0) {
+            setTicket(ticketDataArray[0]); // Assuming you want the first ticket in the array
+          } else {
+            alert("No ticket found.");
+          }
           alert("Ticket registered successfully!");
-          console.log(ticketData);
+          console.log(ticketDataArray[0]);
         } else {
           throw new Error("Failed to register ticket");
         }

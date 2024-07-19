@@ -70,7 +70,6 @@ const DashboardGuestSection = () => {
           </div>
         </div>
       </section>
-      
     </div>
   );
 };
