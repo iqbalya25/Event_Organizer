@@ -1,5 +1,3 @@
-// File: src/components/EventRegistration.tsx
-
 "use client";
 
 import React, { useState } from "react";
@@ -32,7 +30,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
   const { data: session } = useSession();
   const user = session?.user as UserSession;
 
-  const [ticket, setTicket] = useState<TicketData | null>(null);
+  const [ticket, setTicket] = useState<MonthEvents | null>(null);
 
   const handleRegister = async () => {
     if (user) {
@@ -49,7 +47,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
 
         if (registerResponse.status === 200) {
           const ticketResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}api/v1/tickets/${registerResponse.data.id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}api/v1/tickets/event/${event.id}`,
             {
               headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -73,11 +71,11 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
   };
 
   return (
-    <div className="container mx-auto p-4 ">
+    <div className="container mx-auto p-4">
       <div className="font-bold flex flex-col justify-center items-center">
-        <h1 className="text-3xl  p-10">Register To Event</h1>
+        <h1 className="text-3xl p-10">Register To Event</h1>
         <button
-          className="bg-green-500 text-white font-bold py-2 px-4 rounded  hover:bg-green-700 transition duration-200"
+          className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition duration-200"
           onClick={handleRegister}
         >
           Register for Event
@@ -88,7 +86,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
         <div className="mt-4 p-4 border border-gray-300 rounded shadow-md">
           <h2 className="text-xl font-bold mb-2">Ticket</h2>
           <p>
-            <strong>Event:</strong> {ticket.eventName}
+            <strong>Event:</strong> {ticket.name}
           </p>
           <p>
             <strong>Start Date:</strong> {ticket.dateStart}
@@ -104,18 +102,6 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ event }) => {
           </p>
           <p>
             <strong>City:</strong> {ticket.city}
-          </p>
-          <p>
-            <strong>Event Type:</strong> {ticket.eventType}
-          </p>
-          <p>
-            <strong>User:</strong> {ticket.firstName} {ticket.lastName}
-          </p>
-          <p>
-            <strong>Email:</strong> {ticket.email}
-          </p>
-          <p>
-            <strong>Ticket Code:</strong> {ticket.ticketCode}
           </p>
         </div>
       )}
